@@ -2,7 +2,7 @@ const runGameSessionRuleSet = (gameSession) => {
   if (!gameSession) {
     return {
       isSuccessful: false,
-      errorMessage: "Cannot connect to game. No game was found.",
+      errorMessages: ["Cannot connect to game. No game was found."],
     };
   }
 

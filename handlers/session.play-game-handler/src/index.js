@@ -1,3 +1,4 @@
+import { okResponseWithData, fatalErrorResponse } from "@oigamez/responses";
 import {
   createUniqueSessionId,
   incrementAndReturnInSeconds,
@@ -16,10 +17,10 @@ import {
   validateEnvironment,
 } from "./configuration/index.js";
 
-validateEnvironment();
-
 export const handler = async (event) => {
   try {
+    validateEnvironment();
+
     const existingGameCodes = await getAllActiveGameCodes();
     const gameCode = createUniqueGameCode(existingGameCodes);
     const sessionId = createUniqueSessionId();
@@ -37,19 +38,13 @@ export const handler = async (event) => {
 
     await createGameSession(gameSessionToCreate);
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ sessionId, gameCode }),
-    };
+    return okResponseWithData({ sessionId, gameCode });
   } catch (e) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        errorMessages: [
-          "Unknown issue while trying to connect to the game session socket server.",
-        ],
-      }),
-    };
+    console.log(e);
+
+    return fatalErrorResponse(
+      "Unknown issue while trying to connect to the game session socket server."
+    );
   }
 };
 

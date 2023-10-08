@@ -12,10 +12,11 @@
     "@oigamez/configuration": "1.0.0",
     "@oigamez/dynamodb": "1.0.0",
     "@oigamez/repositories": "1.0.0",
+    "@oigamez/responses": "1.0.0",
     "@oigamez/validators": "1.0.0"
   },
   "devDependencies": {    
-    "env-cmd": "^10.1.0"    
+    "env-cmd": "^10.1.0"
   },
   "scripts": {
     "start": "env-cmd -f .env node ./src/index.js"

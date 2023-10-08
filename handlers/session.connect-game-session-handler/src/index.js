@@ -5,6 +5,11 @@ import {
 
 import { gameSessionStatuses } from "@oigamez/dynamodb";
 import { getGameSession } from "@oigamez/repositories";
+import {
+  badRequestResponse,
+  generateEmptyOkResponse,
+  fatalErrorResponse,
+} from "@oigamez/responses";
 import { validateSessionId } from "@oigamez/validators";
 
 import {
@@ -14,22 +19,17 @@ import {
 import { updateGameSessionWithConnectionDetails } from "./repositories/index.js";
 import { runGameSessionRuleSet } from "./rule-sets/index.js";
 
-validateEnvironment();
-
 export const handler = async (event) => {
   try {
+    validateEnvironment();
+
     const sessionId = event.queryStringParameters["sessionId"];
     const connectionId = event.requestContext.connectionId;
     const epochTime = event.requestContext.requestTimeEpoch;
     const validationResult = validateSessionId(sessionId);
 
     if (!validationResult.isSuccessful) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          errorMessages: [validationResult.errorMessage],
-        }),
-      };
+      return badRequestResponse(validationResult.errorMessages);
     }
 
     const ttl = convertFromMillisecondsToSeconds(epochTime);
@@ -37,12 +37,7 @@ export const handler = async (event) => {
     const ruleResult = runGameSessionRuleSet(gameSession);
 
     if (!ruleResult.isSuccessful) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({
-          errorMessages: ruleResult.errorMessages,
-        }),
-      };
+      return badRequestResponse(ruleResult.errorMessages);
     }
 
     const updatedTTL = incrementAndReturnInSeconds(
@@ -59,23 +54,18 @@ export const handler = async (event) => {
 
     await updateGameSessionWithConnectionDetails(updatedGameSession);
 
-    return { statusCode: 200 };
+    return generateEmptyOkResponse();
   } catch (e) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        errorMessages: [
-          "Unknown issue while trying to connect to the game session socket server.",
-        ],
-      }),
-    };
+    return fatalErrorResponse(
+      "Unknown issue while trying to connect to the game session socket server."
+    );
   }
 };
 
 (async () => {
   const event = {
     queryStringParameters: {
-      sessionId: "8ab3d82c69224cb4aebd775869520b31",
+      sessionId: "7bc9fe918b084abd9269eae176dd2b0b",
     },
     requestContext: {
       connectionId: "fljewlfwelfewlfj",
