@@ -1,0 +1,23 @@
+{
+  "name": "@oigamez/session.connect-game-session-handler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.423.0",
+    "@oigamez/configuration": "1.0.0",
+    "@oigamez/dynamodb": "1.0.0",
+    "@oigamez/repositories": "1.0.0",
+    "@oigamez/validators": "1.0.0"
+  },
+  "devDependencies": {    
+    "env-cmd": "^10.1.0"    
+  },
+  "scripts": {
+    "start": "env-cmd -f .env node ./src/index.js"
+  }
+}

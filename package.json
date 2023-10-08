@@ -1,0 +1,17 @@
+{
+  "name": "oigamez",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.51.0"
+  },
+  "private": "true",
+  "workspaces": [
+    "handlers/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18.17.1"
+  }
+}
