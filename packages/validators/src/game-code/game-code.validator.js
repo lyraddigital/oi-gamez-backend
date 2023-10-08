@@ -1,6 +1,6 @@
 import { GAME_CODE_LENGTH } from "@oigamez/configuration";
 
-const validateGameCode = (gameCode) => {
+export const validateGameCode = (gameCode) => {
   const errorMessages = [];
 
   if (!gameCode) {
@@ -21,5 +21,3 @@ const validateGameCode = (gameCode) => {
 
   return { isSuccessful: true };
 };
-
-export default validateGameCode;

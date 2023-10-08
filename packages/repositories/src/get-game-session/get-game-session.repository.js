@@ -2,7 +2,7 @@ import { QueryCommand } from "@aws-sdk/client-dynamodb";
 import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
 import { dbClient, fieldNames, fieldValues } from "@oigamez/dynamodb";
 
-const getGameSession = async (sessionId, ttl) => {
+export const getGameSession = async (sessionId, ttl) => {
   const input = {
     TableName: DYNAMO_TABLE_NAME,
     KeyConditionExpression: "#pk = :pk AND #sk = :sk",
@@ -23,5 +23,3 @@ const getGameSession = async (sessionId, ttl) => {
 
   return response?.Items?.length > 0 ? response.Items[0] : undefined;
 };
-
-export default getGameSession;

@@ -1,9 +1,3 @@
-import convertFromMillisecondsToSeconds from "./milliseconds-to-seconds.service.js";
-import createUniqueSessionId from "./session-id-generator.service.js";
-import incrementAndReturnInSeconds from "./increment-and-convert-to-seconds.service.js";
-
-export {
-  convertFromMillisecondsToSeconds,
-  createUniqueSessionId,
-  incrementAndReturnInSeconds,
-};
+export * from "./milliseconds-to-seconds/index.js";
+export * from "./session-id-generator/index.js";
+export * from "./increment-and-convert-to-seconds/index.js";

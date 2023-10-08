@@ -1,3 +1,1 @@
-import getGameSession from "./get-game-session.repository.js";
-
-export { getGameSession };
+export * from "./get-game-session/index.js";

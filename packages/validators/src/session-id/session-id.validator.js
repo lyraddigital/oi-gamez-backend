@@ -1,4 +1,4 @@
-const validateSessionId = (sessionId) => {
+export const validateSessionId = (sessionId) => {
   if (!sessionId) {
     return {
       isSuccessful: false,
@@ -10,5 +10,3 @@ const validateSessionId = (sessionId) => {
 
   return { isSuccessful: true };
 };
-
-export default validateSessionId;

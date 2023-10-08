@@ -1,5 +1,4 @@
-import { validateOrigin } from "@oigamez/shared";
-import { GAME_CODE_LENGTH } from "@oigamez/configuration";
+import { validateGameCode, validateOrigin } from "@oigamez/validators";
 
 const validateRequest = (origin, gameCode) => {
   const originValidationResult = validateOrigin(origin);
@@ -8,22 +7,10 @@ const validateRequest = (origin, gameCode) => {
     return originValidationResult;
   }
 
-  const errorMessages = [];
+  const gameCodeValidationResult = validateGameCode(gameCode);
 
-  if (!gameCode) {
-    errorMessages.push("Code is required");
-  } else {
-    const gameCodeRegexStr = `^[A-Z]{${GAME_CODE_LENGTH}}$`;
-    const gameCodeRegex = new RegExp(gameCodeRegexStr);
-    const isValidGameCode = gameCode.match(gameCodeRegex);
-
-    if (!isValidGameCode) {
-      errorMessages.push(`Code must be ${GAME_CODE_LENGTH} uppercase letters`);
-    }
-  }
-
-  if (errorMessages.length > 0) {
-    return { isSuccessful: false, errorMessages };
+  if (!gameCodeValidationResult.isSuccessful) {
+    return gameCodeValidationResult;
   }
 
   return { isSuccessful: true };
