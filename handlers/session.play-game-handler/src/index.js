@@ -1,3 +1,4 @@
+import { CONNECT_WINDOW_IN_SECONDS } from "@oigamez/configuration";
 import { okResponseWithData, fatalErrorResponse } from "@oigamez/responses";
 import {
   createUniqueSessionId,
@@ -11,7 +12,6 @@ import {
   getAllActiveGameCodes,
 } from "./repositories/index.js";
 import {
-  CONNECT_WINDOW_IN_SECONDS,
   GAME_SESSION_MAX_PLAYERS,
   GAME_SESSION_MIN_PLAYERS,
   validateEnvironment,
