@@ -13,6 +13,7 @@
     "@oigamez/dynamodb": "1.0.0",
     "@oigamez/repositories": "1.0.0",
     "@oigamez/responses": "1.0.0",
+    "@oigamez/services": "1.0.0",
     "@oigamez/validators": "1.0.0"
   },
   "devDependencies": {    

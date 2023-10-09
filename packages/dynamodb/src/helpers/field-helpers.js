@@ -6,7 +6,19 @@ const types = {
   gameSession: "Game",
 };
 
-export const fieldNames = {
+export const getDynamoString = (dynamoField) => {
+  return dynamoField?.S;
+};
+
+export const getDynamoInt = (dynamoField) => {
+  return dynamoField?.N ? parseInt(dynamoField.N) : undefined;
+};
+
+export const getListOfString = (dynamoField) => {
+  return dynamoField?.SS || [];
+};
+
+export const dynamoFieldNames = {
   common: {
     pk: "PK",
     sk: "SK",
@@ -29,11 +41,11 @@ export const fieldNames = {
 
 export const expressions = {
   common: {
-    keysExists: `attribute_exists(${fieldNames.common.pk}) AND attribute_exists(${fieldNames.common.sk})`,
+    keysExists: `attribute_exists(${dynamoFieldNames.common.pk}) AND attribute_exists(${dynamoFieldNames.common.sk})`,
   },
 };
 
-export const fieldValues = {
+export const dynamofieldValues = {
   gameList: {
     pk: stringAttribute("Game"),
     sk: stringAttribute("#List"),
@@ -59,13 +71,17 @@ export const gameSessionStatuses = {
   notStarted: "Not Started",
 };
 
+export const indexNames = {
+  gameCodeIndex: "GameCode-index",
+};
+
 export const keys = {
   gameList: {
-    [fieldNames.common.pk]: fieldValues.gameList.pk,
-    [fieldNames.common.sk]: fieldValues.gameList.sk,
+    [dynamoFieldNames.common.pk]: dynamofieldValues.gameList.pk,
+    [dynamoFieldNames.common.sk]: dynamofieldValues.gameList.sk,
   },
   gameSession: (sessionId) => ({
-    [fieldNames.common.pk]: fieldValues.gameSession.pk(sessionId),
-    [fieldNames.common.sk]: fieldValues.gameSession.sk,
+    [dynamoFieldNames.common.pk]: dynamofieldValues.gameSession.pk(sessionId),
+    [dynamoFieldNames.common.sk]: dynamofieldValues.gameSession.sk,
   }),
 };

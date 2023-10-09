@@ -2,7 +2,6 @@ import {
   convertFromMillisecondsToSeconds,
   incrementAndReturnInSeconds,
 } from "@oigamez/services";
-
 import { gameSessionStatuses } from "@oigamez/dynamodb";
 import { getGameSession } from "@oigamez/repositories";
 import {
@@ -56,6 +55,8 @@ export const handler = async (event) => {
 
     return generateEmptyOkResponse();
   } catch (e) {
+    console.log(e);
+
     return fatalErrorResponse(
       "Unknown issue while trying to connect to the game session socket server."
     );
@@ -65,7 +66,7 @@ export const handler = async (event) => {
 (async () => {
   const event = {
     queryStringParameters: {
-      sessionId: "7bc9fe918b084abd9269eae176dd2b0b",
+      sessionId: "2914f9ee70fb4a5aa20ec61cb74a04c7",
     },
     requestContext: {
       connectionId: "fljewlfwelfewlfj",

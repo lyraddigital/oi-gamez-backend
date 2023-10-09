@@ -3,8 +3,10 @@ import {
   corsOkResponseWithData,
   fatalErrorResponse,
 } from "@oigamez/responses";
+import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 
 import { validateEnvironment } from "./configuration/index.js";
+import { getGameStatus } from "./services/index.js";
 import { validateRequest } from "./validators/index.js";
 
 export const handler = async (event) => {
@@ -15,17 +17,18 @@ export const handler = async (event) => {
     const gameCode = event?.pathParameters
       ? event.pathParameters["code"]
       : undefined;
+    const epochTime = event.requestContext.requestTimeEpoch;
     const requestValidationResult = validateRequest(origin, gameCode);
+    const ttl = convertFromMillisecondsToSeconds(epochTime);
 
     if (!requestValidationResult.isSuccessful) {
       return corsBadRequestResponse(requestValidationResult.errorMessages);
     }
 
-    return corsOkResponseWithData(origin, {
-      canJoin: true,
-      reason: "",
-    });
+    return corsOkResponseWithData(origin, await getGameStatus(gameCode, ttl));
   } catch (e) {
+    console.log(e);
+
     return fatalErrorResponse(
       "Unknown issue while trying to check the status of a game code."
     );
@@ -33,8 +36,13 @@ export const handler = async (event) => {
 };
 
 (async () => {
-  return await handler({
+  const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "ABCD" },
+    pathParameters: { code: "FXOY" },
+    requestContext: {
+      requestTimeEpoch: Date.now(),
+    },
   });
-})().then((response) => console.log(response));
+
+  console.log(response);
+})();

@@ -1,6 +1,11 @@
 import { GetItemCommand } from "@aws-sdk/client-dynamodb";
 import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
-import { dbClient, fieldNames, keys } from "@oigamez/dynamodb";
+import {
+  dbClient,
+  dynamoFieldNames,
+  getListOfString,
+  keys,
+} from "@oigamez/dynamodb";
 
 const getAllActiveGameCodes = async () => {
   const input = {
@@ -14,7 +19,7 @@ const getAllActiveGameCodes = async () => {
     return [];
   }
 
-  return response.Item[fieldNames.gameList.gameCodes]?.SS || [];
+  return getListOfString(response.Item[dynamoFieldNames.gameList.gameCodes]);
 };
 
 export default getAllActiveGameCodes;
