@@ -17,10 +17,10 @@ import {
   validateEnvironment,
 } from "./configuration/index.js";
 
+validateEnvironment();
+
 export const handler = async (event) => {
   try {
-    validateEnvironment();
-
     const existingGameCodes = await getAllActiveGameCodes();
     const gameCode = createUniqueGameCode(existingGameCodes);
     const sessionId = createUniqueSessionId();

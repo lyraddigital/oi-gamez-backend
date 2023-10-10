@@ -1,4 +1,4 @@
-const runGameSessionRuleSet = (gameSession) => {
+export const runGameSessionRuleSet = (gameSession) => {
   if (!gameSession) {
     return {
       isSuccessful: false,
@@ -8,5 +8,3 @@ const runGameSessionRuleSet = (gameSession) => {
 
   return { isSuccessful: true };
 };
-
-export default runGameSessionRuleSet;

@@ -3,6 +3,8 @@ import { GAME_CODE_LENGTH } from "@oigamez/configuration";
 export const validateGameCode = (gameCode) => {
   const errorMessages = [];
 
+  console.log(!gameCode);
+
   if (!gameCode) {
     errorMessages.push("Code is required");
   } else {

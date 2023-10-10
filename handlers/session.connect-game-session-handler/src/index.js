@@ -18,10 +18,10 @@ import {
 import { updateGameSessionWithConnectionDetails } from "./repositories/index.js";
 import { runGameSessionRuleSet } from "./rule-sets/index.js";
 
+validateEnvironment();
+
 export const handler = async (event) => {
   try {
-    validateEnvironment();
-
     const sessionId = event.queryStringParameters["sessionId"];
     const connectionId = event.requestContext.connectionId;
     const epochTime = event.requestContext.requestTimeEpoch;
@@ -66,7 +66,7 @@ export const handler = async (event) => {
 (async () => {
   const event = {
     queryStringParameters: {
-      sessionId: "2914f9ee70fb4a5aa20ec61cb74a04c7",
+      sessionId: "9126ec10bcc74750860a0ab1e59d2bf9",
     },
     requestContext: {
       connectionId: "fljewlfwelfewlfj",

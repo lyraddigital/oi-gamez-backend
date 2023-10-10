@@ -9,10 +9,10 @@ import { validateEnvironment } from "./configuration/index.js";
 import { getGameStatus } from "./services/index.js";
 import { validateRequest } from "./validators/index.js";
 
+validateEnvironment();
+
 export const handler = async (event) => {
   try {
-    validateEnvironment();
-
     const origin = event?.headers ? event.headers["origin"] : undefined;
     const gameCode = event?.pathParameters
       ? event.pathParameters["code"]
@@ -25,7 +25,7 @@ export const handler = async (event) => {
       return corsBadRequestResponse(requestValidationResult.errorMessages);
     }
 
-    return corsOkResponseWithData(origin, await getGameStatus(gameCode, ttl));
+    return corsOkResponseWithData(await getGameStatus(gameCode, ttl));
   } catch (e) {
     console.log(e);
 
@@ -38,7 +38,7 @@ export const handler = async (event) => {
 (async () => {
   const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "FXOY" },
+    pathParameters: { code: "SCOP" },
     requestContext: {
       requestTimeEpoch: Date.now(),
     },

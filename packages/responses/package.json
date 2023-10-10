@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@oigamez/configuration": "1.0.0"
+  }
 }

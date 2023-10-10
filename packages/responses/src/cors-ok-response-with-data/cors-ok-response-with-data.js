@@ -1,8 +1,10 @@
-export const corsOkResponseWithData = (origin, data) => {
+import { CORS_ALLOWED_ORIGINS } from "@oigamez/configuration";
+
+export const corsOkResponseWithData = (data) => {
   return {
     statusCode: 200,
     headers: {
-      "access-control-allow-origin": origin,
+      "access-control-allow-origin": CORS_ALLOWED_ORIGINS,
       "content-type": "application/json",
     },
     body: JSON.stringify(data),
