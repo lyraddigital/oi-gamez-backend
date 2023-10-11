@@ -1,4 +1,7 @@
-import { getGameSessionByCode } from "@oigamez/repositories";
+import {
+  getGameSessionByCode,
+  getPlayersInGameSession,
+} from "@oigamez/repositories";
 import {
   corsBadRequestResponse,
   corsOkResponseWithData,
@@ -36,7 +39,12 @@ export const handler = async (event) => {
 
     const ttl = convertFromMillisecondsToSeconds(epochTime);
     const gameSession = await getGameSessionByCode(gameCode, ttl);
-    const ruleResult = runJoinGameRuleSet(gameSession, username, []);
+    const existingPlayers = await getPlayersInGameSession(gameSession, ttl);
+    const ruleResult = runJoinGameRuleSet(
+      gameSession,
+      username,
+      existingPlayers
+    );
 
     if (!ruleResult.isSuccessful) {
       return corsBadRequestResponse(ruleResult.errorMessages);
@@ -55,7 +63,7 @@ export const handler = async (event) => {
 (async () => {
   const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "SCOP" },
+    pathParameters: { code: "OTEK" },
     requestContext: {
       requestTimeEpoch: Date.now(),
     },

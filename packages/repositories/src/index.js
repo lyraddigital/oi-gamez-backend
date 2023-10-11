@@ -1,2 +1,3 @@
 export * from "./get-game-session/index.js";
 export * from "./get-game-session-by-code/index.js";
+export * from "./get-players-in-game-session/index.js";

@@ -37,6 +37,9 @@ export const dynamoFieldNames = {
     minPlayers: "MinPlayers",
     maxPlayers: "MaxPlayers",
   },
+  player: {
+    username: "Username",
+  },
 };
 
 export const expressions = {
@@ -62,6 +65,11 @@ export const dynamofieldValues = {
     minPlayers: (minPlayers) => numberAttribute(minPlayers),
     maxPlayers: (maxPlayers) => numberAttribute(maxPlayers),
     sessionId: (sessionId) => stringAttribute(sessionId),
+    ttl: (ttl) => numberAttribute(ttl),
+  },
+  player: {
+    pk: (gameSessionId) => stringAttribute(`Game#${gameSessionId}`),
+    skPrefix: stringAttribute(`#Players#`),
     ttl: (ttl) => numberAttribute(ttl),
   },
 };

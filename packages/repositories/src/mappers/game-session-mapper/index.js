@@ -1,1 +1,1 @@
-export * from "./dynamo-to-model.js";
+export * from "./game-session-mapper.js";
