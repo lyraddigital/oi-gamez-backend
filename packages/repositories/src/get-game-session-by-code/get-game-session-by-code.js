@@ -3,7 +3,7 @@ import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
 import {
   dbClient,
   dynamoFieldNames,
-  dynamofieldValues,
+  dynamoFieldValues,
   indexNames,
 } from "@oigamez/dynamodb";
 
@@ -20,8 +20,8 @@ export const getGameSessionByCode = async (code, ttl) => {
       "#ttl": dynamoFieldNames.common.ttl,
     },
     ExpressionAttributeValues: {
-      ":gameCode": dynamofieldValues.gameSession.gameCode(code),
-      ":ttl": dynamofieldValues.gameSession.ttl(ttl),
+      ":gameCode": dynamoFieldValues.gameSession.gameCode(code),
+      ":ttl": dynamoFieldValues.gameSession.ttl(ttl),
     },
   };
 

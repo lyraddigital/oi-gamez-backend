@@ -4,6 +4,7 @@ const stringArrayAttribute = (stringValues) => ({ SS: stringValues });
 
 const types = {
   gameSession: "Game",
+  player: "Player",
 };
 
 export const getDynamoString = (dynamoField) => {
@@ -38,6 +39,8 @@ export const dynamoFieldNames = {
     maxPlayers: "MaxPlayers",
   },
   player: {
+    hostSessionId: "HostSessionId",
+    sessionId: "PlayerSessionId",
     username: "Username",
   },
 };
@@ -48,7 +51,7 @@ export const expressions = {
   },
 };
 
-export const dynamofieldValues = {
+export const dynamoFieldValues = {
   gameList: {
     pk: stringAttribute("Game"),
     sk: stringAttribute("#List"),
@@ -69,8 +72,13 @@ export const dynamofieldValues = {
   },
   player: {
     pk: (gameSessionId) => stringAttribute(`Game#${gameSessionId}`),
+    sk: (playerSessionId) => stringAttribute(`#Players#${playerSessionId}`),
     skPrefix: stringAttribute(`#Players#`),
+    type: stringAttribute(types.player),
     ttl: (ttl) => numberAttribute(ttl),
+    hostSessionId: (gameSessionId) => stringAttribute(gameSessionId),
+    sessionId: (playerSessionId) => stringAttribute(playerSessionId),
+    username: (username) => stringAttribute(username),
   },
 };
 
@@ -85,11 +93,11 @@ export const indexNames = {
 
 export const keys = {
   gameList: {
-    [dynamoFieldNames.common.pk]: dynamofieldValues.gameList.pk,
-    [dynamoFieldNames.common.sk]: dynamofieldValues.gameList.sk,
+    [dynamoFieldNames.common.pk]: dynamoFieldValues.gameList.pk,
+    [dynamoFieldNames.common.sk]: dynamoFieldValues.gameList.sk,
   },
   gameSession: (sessionId) => ({
-    [dynamoFieldNames.common.pk]: dynamofieldValues.gameSession.pk(sessionId),
-    [dynamoFieldNames.common.sk]: dynamofieldValues.gameSession.sk,
+    [dynamoFieldNames.common.pk]: dynamoFieldValues.gameSession.pk(sessionId),
+    [dynamoFieldNames.common.sk]: dynamoFieldValues.gameSession.sk,
   }),
 };

@@ -4,7 +4,7 @@ import {
   dbClient,
   expressions,
   dynamoFieldNames,
-  dynamofieldValues,
+  dynamoFieldValues,
   keys,
 } from "@oigamez/dynamodb";
 
@@ -21,13 +21,13 @@ const updateGameSessionWithConnectionDetails = async (updatedGameSession) => {
       "#ttl": dynamoFieldNames.common.ttl,
     },
     ExpressionAttributeValues: {
-      ":connectionId": dynamofieldValues.gameSession.connectionId(
+      ":connectionId": dynamoFieldValues.gameSession.connectionId(
         updatedGameSession.connectionId
       ),
-      ":status": dynamofieldValues.gameSession.status(
+      ":status": dynamoFieldValues.gameSession.status(
         updatedGameSession.status
       ),
-      ":ttl": dynamofieldValues.gameSession.ttl(updatedGameSession.ttl),
+      ":ttl": dynamoFieldValues.gameSession.ttl(updatedGameSession.ttl),
     },
   };
 

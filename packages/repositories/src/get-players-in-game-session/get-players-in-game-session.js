@@ -3,7 +3,7 @@ import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
 import {
   dbClient,
   dynamoFieldNames,
-  dynamofieldValues,
+  dynamoFieldValues,
 } from "@oigamez/dynamodb";
 
 import { mapFromDynamoToPlayer } from "../mappers/index.js";
@@ -24,9 +24,9 @@ export const getPlayersInGameSession = async (gameSession, ttl) => {
       "#ttl": dynamoFieldNames.common.ttl,
     },
     ExpressionAttributeValues: {
-      ":pk": dynamofieldValues.player.pk(sessionId),
-      ":sk": dynamofieldValues.player.skPrefix,
-      ":ttl": dynamofieldValues.player.ttl(ttl),
+      ":pk": dynamoFieldValues.player.pk(sessionId),
+      ":sk": dynamoFieldValues.player.skPrefix,
+      ":ttl": dynamoFieldValues.player.ttl(ttl),
     },
   };
 

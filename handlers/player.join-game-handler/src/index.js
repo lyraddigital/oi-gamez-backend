@@ -1,3 +1,4 @@
+import { CONNECT_WINDOW_IN_SECONDS } from "@oigamez/configuration";
 import {
   getGameSessionByCode,
   getPlayersInGameSession,
@@ -7,9 +8,14 @@ import {
   corsOkResponseWithData,
   fatalErrorResponse,
 } from "@oigamez/responses";
-import { convertFromMillisecondsToSeconds } from "@oigamez/services";
+import {
+  convertFromMillisecondsToSeconds,
+  incrementAndReturnInSeconds,
+  createUniqueSessionId,
+} from "@oigamez/services";
 
 import { validateEnvironment } from "./configuration/index.js";
+import { createPlayer } from "./repositories/index.js";
 import { runJoinGameRuleSet } from "./rule-sets/index.js";
 import { validateRequest } from "./validators/index.js";
 
@@ -49,6 +55,19 @@ export const handler = async (event) => {
     if (!ruleResult.isSuccessful) {
       return corsBadRequestResponse(ruleResult.errorMessages);
     }
+
+    const playerSessionId = createUniqueSessionId();
+    const playerTTL = incrementAndReturnInSeconds(
+      epochTime,
+      CONNECT_WINDOW_IN_SECONDS
+    );
+
+    await createPlayer(
+      gameSession.sessionId,
+      playerSessionId,
+      username,
+      playerTTL
+    );
 
     return corsOkResponseWithData({});
   } catch (e) {
