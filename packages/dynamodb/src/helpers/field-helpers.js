@@ -85,6 +85,7 @@ export const dynamoFieldValues = {
 export const gameSessionStatuses = {
   notActive: "Not Active",
   notStarted: "Not Started",
+  completed: "Completed",
 };
 
 export const indexNames = {

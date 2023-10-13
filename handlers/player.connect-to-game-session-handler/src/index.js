@@ -4,6 +4,7 @@ import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 import { validateSessionId } from "@oigamez/validators";
 
 import { validateEnvironment } from "./configuration/index.js";
+import { runConnectToGameSessionRuleSet } from "./rule-sets/index.js";
 
 validateEnvironment();
 
@@ -21,19 +22,12 @@ export const handler = async (event) => {
     const ttl = convertFromMillisecondsToSeconds(epochTime);
     const player = await getPlayerBySessionId(playerSessionId, ttl);
     const gameSession = await getGameSession(player?.hostSessionId, ttl);
+    const ruleResult = runConnectToGameSessionRuleSet(player, gameSession);
 
-    // console.log(player, gameSession, ttl);
-    // const gameSession = await getGameSessionByCode(gameCode, ttl);
-    // const existingPlayers = await getPlayersInGameSession(gameSession, ttl);
-    // const existingUsernames = existingPlayers.map((p) => p.username);
-    // const ruleResult = runJoinGameRuleSet(
-    //   gameSession,
-    //   username,
-    //   existingUsernames
-    // );
-    // if (!ruleResult.isSuccessful) {
-    //   return corsBadRequestResponse(ruleResult.errorMessages);
-    // }
+    if (!ruleResult.isSuccessful) {
+      return badRequestResponse(ruleResult.errorMessages);
+    }
+
     // const playerSessionId = createUniqueSessionId();
     // const playerTTL = incrementAndReturnInSeconds(
     //   epochTime,
