@@ -32,7 +32,7 @@ export const dynamoFieldNames = {
   gameSession: {
     status: "Status",
     currentNumberOfPlayers: "CurrentNumberOfPlayers",
-    connectionId: "ConnectionId",
+    connectionId: "HostConnectionId",
     sessionId: "SessionId",
     gameCode: "GameCode",
     minPlayers: "MinPlayers",

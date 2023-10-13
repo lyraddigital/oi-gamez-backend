@@ -1,7 +1,8 @@
+import { sendCommunicationEvent } from "@oigamez/communication";
 import {
   badRequestResponse,
   fatalErrorResponse,
-  generateEmptyOkResponse,
+  okResponse,
 } from "@oigamez/responses";
 import { getGameSession, getPlayerBySessionId } from "@oigamez/repositories";
 import { convertFromMillisecondsToSeconds } from "@oigamez/services";
@@ -40,7 +41,21 @@ export const handler = async (event) => {
       gameSessionTTL: gameSession.ttl,
     });
 
-    return generateEmptyOkResponse();
+    const hasPreviouslyConnected = !!player.connectionId;
+    const canStartGame =
+      gameSession.minPlayers <= gameSession.currentNumberOfPlayers + 1;
+
+    // If the player has already connected previously we don't need to
+    // notify the game host again. So only do this if this is a first
+    // time connection
+    if (!hasPreviouslyConnected) {
+      await sendCommunicationEvent(gameSession.connectionId, "playerJoined", {
+        username: player.username,
+        canStartGame,
+      });
+    }
+
+    return okResponse();
   } catch (e) {
     console.log(e);
 
@@ -52,7 +67,7 @@ export const handler = async (event) => {
 
 (async () => {
   const response = await handler({
-    queryStringParameters: { sessionId: "eeec46817eb24c47bdfd6ecc3aef9200" },
+    queryStringParameters: { sessionId: "220b25cf60fa4d07ae5735d3e5411938" },
     requestContext: {
       requestTimeEpoch: Date.now(),
       connectionId: "3940329432049",

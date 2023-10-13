@@ -6,8 +6,8 @@ import { gameSessionStatuses } from "@oigamez/dynamodb";
 import { getGameSession } from "@oigamez/repositories";
 import {
   badRequestResponse,
-  generateEmptyOkResponse,
   fatalErrorResponse,
+  okResponse,
 } from "@oigamez/responses";
 import { validateSessionId } from "@oigamez/validators";
 
@@ -43,7 +43,6 @@ export const handler = async (event) => {
       epochTime,
       UPDATED_CONNECT_WINDOW_IN_SECONDS
     );
-
     const updatedGameSession = {
       sessionId,
       status: gameSessionStatuses.notStarted,
@@ -53,7 +52,7 @@ export const handler = async (event) => {
 
     await updateGameSessionWithConnectionDetails(updatedGameSession);
 
-    return generateEmptyOkResponse();
+    return okResponse();
   } catch (e) {
     console.log(e);
 

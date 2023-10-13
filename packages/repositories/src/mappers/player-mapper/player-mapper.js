@@ -6,5 +6,8 @@ export const mapFromDynamoToPlayer = (dynamoRecord) => {
     hostSessionId: getDynamoString(
       dynamoRecord[dynamoFieldNames.player.hostSessionId]
     ),
+    connectionId: getDynamoString(
+      dynamoRecord[dynamoFieldNames.player.connectionId]
+    ),
   };
 };
