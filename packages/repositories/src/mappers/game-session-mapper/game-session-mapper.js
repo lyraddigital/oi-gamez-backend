@@ -25,5 +25,6 @@ export const mapFromDynamoToGameSession = (dynamoRecord) => {
     maxPlayers: getDynamoInt(
       dynamoRecord[dynamoFieldNames.gameSession.maxPlayers]
     ),
+    ttl: getDynamoInt(dynamoRecord[dynamoFieldNames.common.ttl]),
   };
 };

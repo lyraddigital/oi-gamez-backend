@@ -1,6 +1,6 @@
-const numberAttribute = (numberValue) => ({ N: numberValue.toString() });
-const stringAttribute = (stringValue) => ({ S: stringValue });
-const stringArrayAttribute = (stringValues) => ({ SS: stringValues });
+export const numberAttribute = (numberValue) => ({ N: numberValue.toString() });
+export const stringAttribute = (stringValue) => ({ S: stringValue });
+export const stringArrayAttribute = (stringValues) => ({ SS: stringValues });
 
 const types = {
   gameSession: "Game",
@@ -42,6 +42,7 @@ export const dynamoFieldNames = {
     hostSessionId: "HostSessionId",
     sessionId: "PlayerSessionId",
     username: "Username",
+    connectionId: "PlayerConnectionId",
   },
 };
 
@@ -79,6 +80,7 @@ export const dynamoFieldValues = {
     hostSessionId: (gameSessionId) => stringAttribute(gameSessionId),
     sessionId: (playerSessionId) => stringAttribute(playerSessionId),
     username: (username) => stringAttribute(username),
+    connectionId: (connectionId) => stringAttribute(connectionId),
   },
 };
 
@@ -101,5 +103,9 @@ export const keys = {
   gameSession: (sessionId) => ({
     [dynamoFieldNames.common.pk]: dynamoFieldValues.gameSession.pk(sessionId),
     [dynamoFieldNames.common.sk]: dynamoFieldValues.gameSession.sk,
+  }),
+  player: (hostSessionId, playerSessionId) => ({
+    [dynamoFieldNames.common.pk]: dynamoFieldValues.player.pk(hostSessionId),
+    [dynamoFieldNames.common.sk]: dynamoFieldValues.player.sk(playerSessionId),
   }),
 };

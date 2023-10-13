@@ -1,9 +1,14 @@
-import { badRequestResponse } from "@oigamez/responses";
+import {
+  badRequestResponse,
+  fatalErrorResponse,
+  generateEmptyOkResponse,
+} from "@oigamez/responses";
 import { getGameSession, getPlayerBySessionId } from "@oigamez/repositories";
 import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 import { validateSessionId } from "@oigamez/validators";
 
 import { validateEnvironment } from "./configuration/index.js";
+import { updatePlayerAndGameSession } from "./repositories/index.js";
 import { runConnectToGameSessionRuleSet } from "./rule-sets/index.js";
 
 validateEnvironment();
@@ -28,32 +33,29 @@ export const handler = async (event) => {
       return badRequestResponse(ruleResult.errorMessages);
     }
 
-    // const playerSessionId = createUniqueSessionId();
-    // const playerTTL = incrementAndReturnInSeconds(
-    //   epochTime,
-    //   CONNECT_WINDOW_IN_SECONDS
-    // );
-    // await createPlayer(
-    //   gameSession.sessionId,
-    //   playerSessionId,
-    //   username,
-    //   playerTTL
-    // );
-    // return corsOkResponseWithData({ sessionId: playerSessionId });
+    await updatePlayerAndGameSession({
+      playerSessionId,
+      hostSessionId: gameSession.sessionId,
+      connectionId,
+      gameSessionTTL: gameSession.ttl,
+    });
+
+    return generateEmptyOkResponse();
   } catch (e) {
     console.log(e);
 
-    // return fatalErrorResponse(
-    //   "Unknown issue while trying to check the status of a game code."
-    // );
+    return fatalErrorResponse(
+      "Unknown issue while trying to connect to the player socket server."
+    );
   }
 };
 
 (async () => {
   const response = await handler({
-    queryStringParameters: { sessionId: "cf1a5e092ec441e8a98674e09e9ca423" },
+    queryStringParameters: { sessionId: "eeec46817eb24c47bdfd6ecc3aef9200" },
     requestContext: {
       requestTimeEpoch: Date.now(),
+      connectionId: "3940329432049",
     },
   });
 
