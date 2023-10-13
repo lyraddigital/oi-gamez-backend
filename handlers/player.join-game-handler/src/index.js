@@ -46,10 +46,11 @@ export const handler = async (event) => {
     const ttl = convertFromMillisecondsToSeconds(epochTime);
     const gameSession = await getGameSessionByCode(gameCode, ttl);
     const existingPlayers = await getPlayersInGameSession(gameSession, ttl);
+    const existingUsernames = existingPlayers.map((p) => p.username);
     const ruleResult = runJoinGameRuleSet(
       gameSession,
       username,
-      existingPlayers
+      existingUsernames
     );
 
     if (!ruleResult.isSuccessful) {
@@ -69,7 +70,7 @@ export const handler = async (event) => {
       playerTTL
     );
 
-    return corsOkResponseWithData({});
+    return corsOkResponseWithData({ sessionId: playerSessionId });
   } catch (e) {
     console.log(e);
 
@@ -82,7 +83,7 @@ export const handler = async (event) => {
 (async () => {
   const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "OTEK" },
+    pathParameters: { code: "FXXX" },
     requestContext: {
       requestTimeEpoch: Date.now(),
     },

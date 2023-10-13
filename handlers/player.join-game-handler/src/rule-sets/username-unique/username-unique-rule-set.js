@@ -1,12 +1,10 @@
 export const runUniqueUsernameRuleSet = (username, existingUsernames) => {
-  const isUsernameUnique = !existingUsernames.includes(
-    (un) => un.toLowerCase() === username.toLowerCase()
-  );
+  const isUsernameUsed = existingUsernames.includes(username);
 
-  if (!isUsernameUnique) {
+  if (isUsernameUsed) {
     return {
       isSuccessful: false,
-      errorMessges: [
+      errorMessages: [
         `Can't join the game session. The username is already used. Try another username`,
       ],
     };
