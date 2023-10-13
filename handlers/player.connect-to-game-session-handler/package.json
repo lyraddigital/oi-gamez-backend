@@ -1,0 +1,20 @@
+{
+  "name": "@oigamez/player.connect-to-game-session-handler",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "@oigamez/configuration": "1.0.0",
+    "@oigamez/repositories": "1.0.0",
+    "@oigamez/responses": "1.0.0",
+    "@oigamez/services": "1.0.0",
+    "@oigamez/validators": "1.0.0"
+  },
+  "devDependencies": {    
+    "env-cmd": "^10.1.0"
+  },
+  "scripts": {
+    "start": "env-cmd -f .env node ./src/index.js"
+  }
+}
