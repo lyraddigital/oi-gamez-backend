@@ -8,15 +8,22 @@ export const sendCommunicationEvent = async (
   communicationEventPayload
 ) => {
   if (connectionId && action) {
-    const payload = communicationEventPayload || {};
-    const command = new PostToConnectionCommand({
-      ConnectionId: connectionId,
-      Data: JSON.stringify({
-        action,
-        ...payload,
-      }),
-    });
+    try {
+      const payload = communicationEventPayload || {};
+      const command = new PostToConnectionCommand({
+        ConnectionId: connectionId,
+        Data: JSON.stringify({
+          action,
+          ...payload,
+        }),
+      });
 
-    await client.send(command);
+      await client.send(command);
+    } catch (e) {
+      console.log(
+        "Error while trying to send a communication message to a socket",
+        e
+      );
+    }
   }
 };

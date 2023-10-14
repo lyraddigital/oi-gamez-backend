@@ -1,6 +1,7 @@
 export const numberAttribute = (numberValue) => ({ N: numberValue.toString() });
 export const stringAttribute = (stringValue) => ({ S: stringValue });
 export const stringArrayAttribute = (stringValues) => ({ SS: stringValues });
+export const booleanAttribute = (boolValue) => ({ BOOL: boolValue.toString() });
 
 const types = {
   gameSession: "Game",
@@ -15,8 +16,16 @@ export const getDynamoInt = (dynamoField) => {
   return dynamoField?.N ? parseInt(dynamoField.N) : undefined;
 };
 
-export const getListOfString = (dynamoField) => {
+export const getDynamoSet = (dynamoField) => {
   return dynamoField?.SS || [];
+};
+
+export const getDynamoList = (dynamoField) => {
+  return dynamoField?.L || [];
+};
+
+export const getDynamoMap = (dynamoField) => {
+  return dynamoField?.M || {};
 };
 
 export const dynamoFieldNames = {
@@ -30,19 +39,26 @@ export const dynamoFieldNames = {
     gameCodes: "GameCodes",
   },
   gameSession: {
+    answers: "Answers",
     status: "Status",
     currentNumberOfPlayers: "CurrentNumberOfPlayers",
+    currentQuestionNumber: "CurrentQuestionNumber",
     connectionId: "HostConnectionId",
+    isAllowingSubmissions: "IsAllowingSubmissions",
     sessionId: "SessionId",
     gameCode: "GameCode",
     minPlayers: "MinPlayers",
     maxPlayers: "MaxPlayers",
+    questions: "Questions",
   },
   player: {
     hostSessionId: "HostSessionId",
     sessionId: "PlayerSessionId",
     username: "Username",
     connectionId: "PlayerConnectionId",
+  },
+  questionGroupCount: {
+    questionGroupCount: "QuestionGroupCount",
   },
 };
 
@@ -82,11 +98,21 @@ export const dynamoFieldValues = {
     username: (username) => stringAttribute(username),
     connectionId: (connectionId) => stringAttribute(connectionId),
   },
+  questionGroup: {
+    pk: (questionGroupNumber) =>
+      stringAttribute(`QuestionGroups#${questionGroupNumber}`),
+    sk: stringAttribute("#Metadata"),
+  },
+  questionGroupCount: {
+    pk: stringAttribute("QuestionGroups"),
+    sk: stringAttribute("#List"),
+  },
 };
 
 export const gameSessionStatuses = {
   notActive: "Not Active",
   notStarted: "Not Started",
+  inProgress: "In Progress",
   completed: "Completed",
 };
 
@@ -108,5 +134,14 @@ export const keys = {
   player: (hostSessionId, playerSessionId) => ({
     [dynamoFieldNames.common.pk]: dynamoFieldValues.player.pk(hostSessionId),
     [dynamoFieldNames.common.sk]: dynamoFieldValues.player.sk(playerSessionId),
+  }),
+  questionGroupCount: {
+    [dynamoFieldNames.common.pk]: dynamoFieldValues.questionGroupCount.pk,
+    [dynamoFieldNames.common.sk]: dynamoFieldValues.questionGroupCount.sk,
+  },
+  questionGroup: (questionGroupNumber) => ({
+    [dynamoFieldNames.common.pk]:
+      dynamoFieldValues.questionGroup.pk(questionGroupNumber),
+    [dynamoFieldNames.common.sk]: dynamoFieldValues.questionGroup.sk,
   }),
 };

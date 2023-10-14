@@ -3,7 +3,7 @@ import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
 import {
   dbClient,
   dynamoFieldNames,
-  getListOfString,
+  getDynamoSet,
   keys,
 } from "@oigamez/dynamodb";
 
@@ -19,7 +19,7 @@ const getAllActiveGameCodes = async () => {
     return [];
   }
 
-  return getListOfString(response.Item[dynamoFieldNames.gameList.gameCodes]);
+  return getDynamoSet(response.Item[dynamoFieldNames.gameList.gameCodes]);
 };
 
 export default getAllActiveGameCodes;
