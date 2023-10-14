@@ -67,7 +67,7 @@ export const handler = async (event) => {
 
 (async () => {
   const response = await handler({
-    queryStringParameters: { sessionId: "220b25cf60fa4d07ae5735d3e5411938" },
+    queryStringParameters: { sessionId: "8117253178d64eceb81a27d5568bec33" },
     requestContext: {
       requestTimeEpoch: Date.now(),
       connectionId: "3940329432049",

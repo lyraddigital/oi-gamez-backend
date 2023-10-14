@@ -1,5 +1,5 @@
 {
-  "name": "@oigamez/player.connect-to-game-session-handler",
+  "name": "player.disconnect-from-game-session-handler",
   "version": "1.0.0",
   "main": "src/index.js",
   "type": "module",
@@ -11,8 +11,7 @@
     "@oigamez/dynamodb": "1.0.0",
     "@oigamez/repositories": "1.0.0",
     "@oigamez/responses": "1.0.0",
-    "@oigamez/services": "1.0.0",
-    "@oigamez/validators": "1.0.0"
+    "@oigamez/services": "1.0.0"
   },
   "devDependencies": {    
     "env-cmd": "^10.1.0"

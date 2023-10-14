@@ -93,6 +93,7 @@ export const gameSessionStatuses = {
 export const indexNames = {
   gameCodeIndex: "GameCode-index",
   playerSessionIndex: "PlayerSession-index",
+  playerConnectionIndex: "PlayerConnection-index",
 };
 
 export const keys = {

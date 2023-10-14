@@ -83,7 +83,7 @@ export const handler = async (event) => {
 (async () => {
   const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "JMXN" },
+    pathParameters: { code: "ROTM" },
     requestContext: {
       requestTimeEpoch: Date.now(),
     },
