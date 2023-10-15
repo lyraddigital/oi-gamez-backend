@@ -1,3 +1,4 @@
+import { PLAYER_WEBSOCKET_ENDPOINT } from "@oigamez/configuration";
 import { sendCommunicationEvent } from "@oigamez/communication";
 import { getGameSession, getPlayersInGameSession } from "@oigamez/repositories";
 import {
@@ -62,13 +63,17 @@ export const handler = async (event) => {
 
     const communicationQuestion = mapToCommunicationQuestion(firstQuestion);
     const players = await getPlayersInGameSession(gameSession, ttl);
-    console.log(players);
     const communicationPromises = players.map((player) =>
-      sendCommunicationEvent(player.connectionId, "gameStarted", {
-        question: communicationQuestion,
-        currentQuestionNumber: 1,
-        totalNumberOfQuestions: count,
-      })
+      sendCommunicationEvent(
+        PLAYER_WEBSOCKET_ENDPOINT,
+        player.connectionId,
+        "gameStarted",
+        {
+          question: communicationQuestion,
+          currentQuestionNumber: 1,
+          totalNumberOfQuestions: count,
+        }
+      )
     );
 
     await Promise.all(communicationPromises);
@@ -88,7 +93,7 @@ export const handler = async (event) => {
 (async () => {
   const event = {
     headers: {
-      ["api-session-id"]: "73a31906b8154465a218c79f77843296",
+      ["api-session-id"]: "f6ccdd24f10a433ebb27bdf6e90f50a7",
     },
     requestContext: {
       requestTimeEpoch: Date.now(),

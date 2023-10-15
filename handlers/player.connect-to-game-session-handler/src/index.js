@@ -1,3 +1,4 @@
+import { GAME_SESSION_WEBSOCKET_ENDPOINT } from "@oigamez/configuration";
 import { sendCommunicationEvent } from "@oigamez/communication";
 import {
   badRequestResponse,
@@ -49,10 +50,15 @@ export const handler = async (event) => {
     // notify the game host again. So only do this if this is a first
     // time connection
     if (!hasPreviouslyConnected) {
-      await sendCommunicationEvent(gameSession.connectionId, "playerJoined", {
-        username: player.username,
-        canStartGame,
-      });
+      await sendCommunicationEvent(
+        GAME_SESSION_WEBSOCKET_ENDPOINT,
+        gameSession.connectionId,
+        "playerJoined",
+        {
+          username: player.username,
+          canStartGame,
+        }
+      );
     }
 
     return okResponse();
@@ -67,7 +73,7 @@ export const handler = async (event) => {
 
 (async () => {
   const response = await handler({
-    queryStringParameters: { sessionId: "fb76098faad24a6cb1804b2240f89df3" },
+    queryStringParameters: { sessionId: "3e141393c4ef436aaa67d081874755d1" },
     requestContext: {
       requestTimeEpoch: Date.now(),
       connectionId: "3940329432049",

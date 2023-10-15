@@ -1,7 +1,14 @@
 import { ApiGatewayManagementApiClient } from "@aws-sdk/client-apigatewaymanagementapi";
-import { GAME_SESSION_WEBSOCKET_ENDPOINT } from "@oigamez/configuration";
 
-export const client = new ApiGatewayManagementApiClient({
-  endpoint: GAME_SESSION_WEBSOCKET_ENDPOINT,
-  region: "ap-southeast-2",
-});
+let client;
+
+export const getClient = (endpoint) => {
+  if (!client) {
+    client = new ApiGatewayManagementApiClient({
+      endpoint: endpoint,
+      region: "ap-southeast-2",
+    });
+  }
+
+  return client;
+};

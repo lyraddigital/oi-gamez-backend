@@ -1,3 +1,4 @@
+import { GAME_SESSION_WEBSOCKET_ENDPOINT } from "@oigamez/configuration";
 import { sendCommunicationEvent } from "@oigamez/communication";
 import { gameSessionStatuses } from "@oigamez/dynamodb";
 import { getGameSession, getPlayerByConnectionId } from "@oigamez/repositories";
@@ -46,10 +47,15 @@ export const handler = async (event) => {
       const canStartGame =
         gameSession.minPlayers <= gameSession.currentNumberOfPlayers - 1;
 
-      await sendCommunicationEvent(gameSession.connectionId, "playerLeft", {
-        username: player.username,
-        canStartGame,
-      });
+      await sendCommunicationEvent(
+        GAME_SESSION_WEBSOCKET_ENDPOINT,
+        gameSession.connectionId,
+        "playerLeft",
+        {
+          username: player.username,
+          canStartGame,
+        }
+      );
     } else {
       await clearPlayerConnection({
         hostSessionId: gameSession.sessionId,

@@ -1,8 +1,9 @@
 import { PostToConnectionCommand } from "@aws-sdk/client-apigatewaymanagementapi";
 
-import { client } from "../client/index.js";
+import { getClient } from "../client/index.js";
 
 export const sendCommunicationEvent = async (
+  endpoint,
   connectionId,
   action,
   communicationEventPayload
@@ -18,7 +19,7 @@ export const sendCommunicationEvent = async (
         }),
       });
 
-      await client.send(command);
+      await getClient(endpoint).send(command);
     } catch (e) {
       console.log(
         "Error while trying to send a communication message to a socket",

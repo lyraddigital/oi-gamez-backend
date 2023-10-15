@@ -83,11 +83,11 @@ export const handler = async (event) => {
 (async () => {
   const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "FAMD" },
+    pathParameters: { code: "BPSU" },
     requestContext: {
       requestTimeEpoch: Date.now(),
     },
-    body: JSON.stringify({ username: "daryl_duck" }),
+    body: JSON.stringify({ username: "daryl_duck2" }),
   });
 
   console.log(response);

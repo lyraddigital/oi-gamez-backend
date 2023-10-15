@@ -5,8 +5,9 @@ import {
 } from "@oigamez/dynamodb";
 
 export const getFirstQuestionAndCountFromDynamo = (dynamoQuestions) => {
-  const firstDynamoQuestion = getDynamoMap(getDynamoList(dynamoQuestions)[0]);
-  const dynamoQuestionCount = dynamoQuestions.length;
+  const dynamoQuestionList = getDynamoList(dynamoQuestions);
+  const firstDynamoQuestion = getDynamoMap(dynamoQuestionList[0]);
+  const dynamoQuestionCount = dynamoQuestionList.length;
   const firstQuestion = {
     text: getDynamoString(firstDynamoQuestion.questionText),
     options: getDynamoList(firstDynamoQuestion.options).map((o) => {
