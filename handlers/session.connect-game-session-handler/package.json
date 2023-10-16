@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-lambda": "^1.0.7",
     "@aws-sdk/client-dynamodb": "^3.423.0",
     "@oigamez/configuration": "1.0.0",
     "@oigamez/dynamodb": "1.0.0",
@@ -17,9 +18,10 @@
     "@oigamez/validators": "1.0.0"
   },
   "devDependencies": {    
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^10.1.0",
+    "@types/aws-lambda": "^8.10.124"
   },
   "scripts": {
-    "start": "env-cmd -f .env node ./src/index.js"
+    "start": "env-cmd -f .env ts-node-esm ./src/index.ts"
   }
 }

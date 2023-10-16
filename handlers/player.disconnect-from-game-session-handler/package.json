@@ -13,7 +13,8 @@
     "@oigamez/responses": "1.0.0",
     "@oigamez/services": "1.0.0"
   },
-  "devDependencies": {    
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.124",
     "env-cmd": "^10.1.0"
   },
   "scripts": {

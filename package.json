@@ -4,10 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^20.8.6",
     "eslint": "^8.51.0",
-    "lerna": "^7.3.0"
+    "lerna": "^7.3.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   },
   "private": "true",
+  "scripts": {
+    "tsc": "tsc"
+  },
   "workspaces": [
     "handlers/*",
     "packages/*"
