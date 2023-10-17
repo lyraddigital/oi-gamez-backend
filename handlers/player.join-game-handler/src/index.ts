@@ -87,8 +87,8 @@ export const handler = async (
 (async () => {
   const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "BPSU" },
-    body: JSON.stringify({ username: "daryl_duck2" }),
+    pathParameters: { code: "XKPE" },
+    body: JSON.stringify({ username: "daryl_duck8" }),
     queryStringParameters: {},
     requestContext: {
       authorizer: null,

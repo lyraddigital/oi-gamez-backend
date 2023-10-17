@@ -76,7 +76,7 @@ export const handler = async (
 
 (async () => {
   const response = await handler({
-    queryStringParameters: { sessionId: "3e141393c4ef436aaa67d081874755d1" },
+    queryStringParameters: { sessionId: "2aeddad52f4a46879ba9c8e74aaa5686" },
     requestContext: {
       authorizer: null,
       identity: null,

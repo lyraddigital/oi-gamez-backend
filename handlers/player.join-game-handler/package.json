@@ -5,6 +5,7 @@
   "type": "module",
   "license": "MIT",
   "dependencies": {
+    "aws-lambda": "^1.0.7",
     "@oigamez/configuration": "1.0.0",
     "@oigamez/dynamodb": "1.0.0",
     "@oigamez/repositories": "1.0.0",
@@ -17,6 +18,6 @@
     "env-cmd": "^10.1.0"    
   },
   "scripts": {
-    "start": "env-cmd -f .env node ./src/index.js"
+    "start": "env-cmd -f .env ts-node-esm ./src/index.ts"
   }
 }

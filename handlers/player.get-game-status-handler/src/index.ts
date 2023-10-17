@@ -39,7 +39,7 @@ export const handler = async (event) => {
 (async () => {
   const response = await handler({
     headers: { origin: "https://oigamez.com" },
-    pathParameters: { code: "UKUX" },
+    pathParameters: { code: "XKPE" },
     requestContext: {
       requestTimeEpoch: Date.now(),
     },
