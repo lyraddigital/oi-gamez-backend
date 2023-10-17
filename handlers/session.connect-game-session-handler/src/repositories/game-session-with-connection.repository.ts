@@ -11,7 +11,11 @@ import {
   keys,
 } from "@oigamez/dynamodb";
 
-const updateGameSessionWithConnectionDetails = async (updatedGameSession) => {
+import { UpdatedGameSession } from "../models/updated-game-session.js";
+
+const updateGameSessionWithConnectionDetails = async (
+  updatedGameSession: UpdatedGameSession
+) => {
   const input: UpdateItemCommandInput = {
     TableName: DYNAMO_TABLE_NAME,
     Key: keys.gameSession(updatedGameSession.sessionId),

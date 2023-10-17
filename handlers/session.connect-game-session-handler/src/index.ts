@@ -16,6 +16,7 @@ import {
   UPDATED_CONNECT_WINDOW_IN_SECONDS,
   validateEnvironment,
 } from "./configuration/index.js";
+import { UpdatedGameSession } from "./models/index.js";
 import { updateGameSessionWithConnectionDetails } from "./repositories/index.js";
 import { runGameSessionRuleSet } from "./rule-sets/index.js";
 
@@ -46,7 +47,7 @@ export const handler = async (
       epochTime,
       UPDATED_CONNECT_WINDOW_IN_SECONDS
     );
-    const updatedGameSession = {
+    const updatedGameSession: UpdatedGameSession = {
       sessionId,
       status: GameSessionStatuses.notStarted,
       connectionId,
@@ -68,12 +69,13 @@ export const handler = async (
 (async () => {
   const event: APIGatewayProxyEvent = {
     queryStringParameters: {
-      sessionId: "186e4cad5b0c4d91af09331a993adda6",
+      sessionId: "c577639cbde246ef97e7b796fd28fa40",
     },
     headers: {},
     pathParameters: {},
     body: "",
     requestContext: {
+      connectionId: "3939384849585",
       authorizer: null,
       identity: null,
       requestId: "19933884",
