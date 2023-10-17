@@ -51,7 +51,7 @@ export const getDynamoList = (
   return dynamoField?.L || [];
 };
 
-export const getDynamoMap = (dynamoField: AttributeValue.MMember) => {
+export const getDynamoMap = (dynamoField: AttributeValue) => {
   return dynamoField?.M;
 };
 

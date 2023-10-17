@@ -10,8 +10,9 @@ import { Question } from "../../models/index.js";
 export const getFirstQuestionAndCountFromDynamo = (
   dynamoQuestions: AttributeValue
 ): [Question, number] => {
-  const firstDynamoQuestion = getDynamoMap(dynamoQuestions[0]);
-  const dynamoQuestionCount = getDynamoList(dynamoQuestions).length;
+  const dynamoQuestionList = getDynamoList(dynamoQuestions);
+  const firstDynamoQuestion = getDynamoMap(dynamoQuestionList[0]);
+  const dynamoQuestionCount = dynamoQuestionList.length;
   const firstQuestion: Question = {
     text: getDynamoString(firstDynamoQuestion.questionText),
     options: getDynamoList(firstDynamoQuestion.options).map(
