@@ -12,16 +12,23 @@ import {
   keys,
 } from "@oigamez/dynamodb";
 
-const createGameSession = async (gameSessionToCreate): Promise<void> => {
+import { GameSessionToCreate } from "../models/index.js";
+
+const createGameSession = async ({
+  gameCode,
+  maxPlayers,
+  minPlayers,
+  sessionId,
+  ttl,
+}: GameSessionToCreate): Promise<void> => {
   const input: TransactWriteItemsCommandInput = {
     TransactItems: [
       {
         Put: {
           TableName: DYNAMO_TABLE_NAME,
           Item: {
-            [dynamoFieldNames.common.pk]: dynamoFieldValues.gameSession.pk(
-              gameSessionToCreate.sessionId
-            ),
+            [dynamoFieldNames.common.pk]:
+              dynamoFieldValues.gameSession.pk(sessionId),
             [dynamoFieldNames.common.sk]: dynamoFieldValues.gameSession.sk,
             [dynamoFieldNames.common.type]: dynamoFieldValues.gameSession.type,
             [dynamoFieldNames.gameSession.status]:
@@ -31,24 +38,15 @@ const createGameSession = async (gameSessionToCreate): Promise<void> => {
             [dynamoFieldNames.gameSession.currentNumberOfPlayers]:
               dynamoFieldValues.gameSession.currentNumberOfPlayers(0),
             [dynamoFieldNames.gameSession.sessionId]:
-              dynamoFieldValues.gameSession.sessionId(
-                gameSessionToCreate.sessionId
-              ),
+              dynamoFieldValues.gameSession.sessionId(sessionId),
             [dynamoFieldNames.gameSession.gameCode]:
-              dynamoFieldValues.gameSession.gameCode(
-                gameSessionToCreate.gameCode
-              ),
+              dynamoFieldValues.gameSession.gameCode(gameCode),
             [dynamoFieldNames.gameSession.minPlayers]:
-              dynamoFieldValues.gameSession.minPlayers(
-                gameSessionToCreate.minPlayers
-              ),
+              dynamoFieldValues.gameSession.minPlayers(minPlayers),
             [dynamoFieldNames.gameSession.maxPlayers]:
-              dynamoFieldValues.gameSession.maxPlayers(
-                gameSessionToCreate.maxPlayers
-              ),
-            [dynamoFieldNames.common.ttl]: dynamoFieldValues.gameSession.ttl(
-              gameSessionToCreate.ttl
-            ),
+              dynamoFieldValues.gameSession.maxPlayers(maxPlayers),
+            [dynamoFieldNames.common.ttl]:
+              dynamoFieldValues.gameSession.ttl(ttl),
           },
         },
       },
@@ -62,9 +60,7 @@ const createGameSession = async (gameSessionToCreate): Promise<void> => {
             "#gameCodes": dynamoFieldNames.gameList.gameCodes,
           },
           ExpressionAttributeValues: {
-            ":gameCode": dynamoFieldValues.gameList.gameCodes([
-              gameSessionToCreate.gameCode,
-            ]),
+            ":gameCode": dynamoFieldValues.gameList.gameCodes([gameCode]),
           },
         },
       },

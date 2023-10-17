@@ -6,6 +6,7 @@ import {
   incrementAndReturnInSeconds,
 } from "@oigamez/services";
 
+import { GameSessionToCreate } from "./models/index.js";
 import { createUniqueGameCode } from "./services/index.js";
 
 import {
@@ -31,7 +32,7 @@ export const handler = async (
       event.requestContext.requestTimeEpoch,
       CONNECT_WINDOW_IN_SECONDS
     );
-    const gameSessionToCreate = {
+    const gameSessionToCreate: GameSessionToCreate = {
       sessionId,
       gameCode,
       ttl,

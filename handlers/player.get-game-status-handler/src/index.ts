@@ -1,4 +1,4 @@
-import {} from "aws-lambda";
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import {
   corsBadRequestResponse,
   corsOkResponseWithData,
@@ -12,7 +12,9 @@ import { validateRequest } from "./validators/index.js";
 
 validateEnvironment();
 
-export const handler = async (event) => {
+export const handler = async (
+  event: APIGatewayProxyEvent
+): Promise<APIGatewayProxyResult> => {
   try {
     const origin = event?.headers ? event.headers["origin"] : undefined;
     const gameCode = event?.pathParameters
@@ -38,11 +40,32 @@ export const handler = async (event) => {
 
 (async () => {
   const response = await handler({
+    queryStringParameters: {},
     headers: { origin: "https://oigamez.com" },
     pathParameters: { code: "XKPE" },
+    body: "",
     requestContext: {
+      connectionId: "3940329432049",
+      authorizer: null,
+      identity: null,
+      requestId: "19933884",
+      resourceId: "",
+      resourcePath: "",
+      accountId: "",
+      apiId: "api123",
+      httpMethod: "PUT",
+      path: "/",
+      protocol: "websocket",
+      stage: "local",
       requestTimeEpoch: Date.now(),
     },
+    multiValueHeaders: {},
+    httpMethod: "PUT",
+    isBase64Encoded: false,
+    path: "",
+    multiValueQueryStringParameters: null,
+    stageVariables: null,
+    resource: "",
   });
 
   console.log(response);
