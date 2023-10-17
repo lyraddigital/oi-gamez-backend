@@ -6,8 +6,8 @@ import {
   dynamoFieldValues,
 } from "@oigamez/dynamodb";
 
-import { mapFromDynamoToPlayer } from "../mappers/index.js";
-import { GameSession, Player } from "../models/index.js";
+import { mapFromDynamoToPlayer } from "../mappers";
+import { GameSession, Player } from "../models";
 
 export const getPlayersInGameSession = async (
   gameSession: GameSession,

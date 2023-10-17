@@ -1,1 +1,1 @@
-export * from "./clear-player-connection.js";
+export * from "./clear-player-connection";

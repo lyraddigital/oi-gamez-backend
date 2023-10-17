@@ -1,1 +1,1 @@
-export * from "./join-game-rule-set.js";
+export * from "./join-game-rule-set";

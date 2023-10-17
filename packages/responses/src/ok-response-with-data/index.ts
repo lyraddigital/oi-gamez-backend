@@ -1,1 +1,1 @@
-export * from "./ok-response-with-data.js";
+export * from "./ok-response-with-data";

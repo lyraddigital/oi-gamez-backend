@@ -11,7 +11,7 @@ import {
   numberAttribute,
 } from "@oigamez/dynamodb";
 
-import { PlayerAndGameSession } from "../../models/player-and-game-session.js";
+import { PlayerAndGameSession } from "../../models/player-and-game-session";
 
 export const removePlayerAndUpdateGameSession = async ({
   playerSessionId,

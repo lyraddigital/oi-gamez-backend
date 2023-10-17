@@ -1,1 +1,1 @@
-export * from "./bad-request.js";
+export * from "./bad-request";

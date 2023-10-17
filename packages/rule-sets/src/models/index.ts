@@ -1,1 +1,1 @@
-export * from "./rule-set-result.js";
+export * from "./rule-set-result";

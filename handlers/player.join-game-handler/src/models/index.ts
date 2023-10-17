@@ -1,1 +1,1 @@
-export * from "./join-game-payload.js";
+export * from "./join-game-payload";

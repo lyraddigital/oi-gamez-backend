@@ -7,8 +7,8 @@ import {
   IndexNames,
 } from "@oigamez/dynamodb";
 
-import { mapFromDynamoToPlayer } from "../mappers/index.js";
-import { Player } from "../models/index.js";
+import { mapFromDynamoToPlayer } from "../mappers";
+import { Player } from "../models";
 
 export const getPlayerBySessionId = async (
   sessionId: string,

@@ -7,8 +7,8 @@ import {
   IndexNames,
 } from "@oigamez/dynamodb";
 
-import { mapFromDynamoToGameSession } from "../mappers/index.js";
-import { GameSession } from "../models/index.js";
+import { mapFromDynamoToGameSession } from "../mappers";
+import { GameSession } from "../models";
 
 export const getGameSessionByCode = async (
   code: string,

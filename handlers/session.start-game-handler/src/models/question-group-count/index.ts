@@ -1,1 +1,1 @@
-export * from "./question-group-count.js";
+export * from "./question-group-count";

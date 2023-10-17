@@ -1,3 +1,3 @@
-export * from "./min-players/index.js";
-export * from "./max-players/index.js";
-export * from "./validate-environment.js";
+export * from "./min-players";
+export * from "./max-players";
+export * from "./validate-environment";

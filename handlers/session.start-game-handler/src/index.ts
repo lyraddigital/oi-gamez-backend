@@ -10,17 +10,17 @@ import {
 import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 import { validateSessionId } from "@oigamez/validators";
 
-import { validateEnvironment } from "./configuration/index.js";
+import { validateEnvironment } from "./configuration";
 import {
   getQuestionGroupByNumber,
   getQuestionGroupCount,
   updateGameWithQuestionGroupDetails,
-} from "./repositories/index.js";
-import { runStartGameRuleSet } from "./rule-sets/index.js";
+} from "./repositories";
+import { runStartGameRuleSet } from "./rule-sets";
 import {
   getFirstQuestionAndCountFromDynamo,
   mapToCommunicationQuestion,
-} from "./services/index.js";
+} from "./services";
 
 validateEnvironment();
 

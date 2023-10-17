@@ -5,7 +5,7 @@ import {
   getDynamoString,
 } from "@oigamez/dynamodb";
 
-import { GameSession } from "../../models/index.js";
+import { GameSession } from "../../models";
 
 export const mapFromDynamoToGameSession = (
   dynamoRecord: Record<string, AttributeValue>

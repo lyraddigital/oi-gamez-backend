@@ -1,3 +1,3 @@
-import validateRequest from "./validate-request.js";
+import validateRequest from "./validate-request";
 
 export { validateRequest };

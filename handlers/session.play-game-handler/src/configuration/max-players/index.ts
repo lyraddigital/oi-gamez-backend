@@ -1,2 +1,2 @@
-export * from "./max-players.js";
-export * from "./verify-max-players.js";
+export * from "./max-players";
+export * from "./verify-max-players";

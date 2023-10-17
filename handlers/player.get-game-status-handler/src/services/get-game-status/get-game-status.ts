@@ -1,7 +1,7 @@
 import { GameSessionStatuses } from "@oigamez/dynamodb";
 import { getGameSessionByCode } from "@oigamez/repositories";
 
-import { GameSessionStatus } from "../../models/index.js";
+import { GameSessionStatus } from "../../models";
 
 export const getGameStatus = async (
   code: string,

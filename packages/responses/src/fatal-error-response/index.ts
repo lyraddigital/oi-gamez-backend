@@ -1,1 +1,1 @@
-export * from "./fatal-error-response.js";
+export * from "./fatal-error-response";

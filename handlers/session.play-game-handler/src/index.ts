@@ -6,18 +6,15 @@ import {
   incrementAndReturnInSeconds,
 } from "@oigamez/services";
 
-import { GameSessionToCreate } from "./models/index.js";
-import { createUniqueGameCode } from "./services/index.js";
+import { GameSessionToCreate } from "./models";
+import { createUniqueGameCode } from "./services";
 
-import {
-  createGameSession,
-  getAllActiveGameCodes,
-} from "./repositories/index.js";
+import { createGameSession, getAllActiveGameCodes } from "./repositories";
 import {
   GAME_SESSION_MAX_PLAYERS,
   GAME_SESSION_MIN_PLAYERS,
   validateEnvironment,
-} from "./configuration/index.js";
+} from "./configuration";
 
 validateEnvironment();
 

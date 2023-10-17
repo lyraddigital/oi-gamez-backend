@@ -4,8 +4,8 @@ import {
   verifyGameCodeLength,
 } from "@oigamez/configuration";
 
-import { verifyMinPlayers } from "./min-players/index.js";
-import { verifyMaxPlayers } from "./max-players/index.js";
+import { verifyMinPlayers } from "./min-players";
+import { verifyMaxPlayers } from "./max-players";
 
 export const validateEnvironment = (): void => {
   verifyDynamoTableName();

@@ -1,1 +1,1 @@
-export * from "./question-group-count-mapper.js";
+export * from "./question-group-count-mapper";

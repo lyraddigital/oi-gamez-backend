@@ -1,4 +1,4 @@
-import { DYNAMO_TABLE_NAME } from "./dynamo-table-name.js";
+import { DYNAMO_TABLE_NAME } from "./dynamo-table-name";
 
 export const verifyDynamoTableName = (): void => {
   if (!DYNAMO_TABLE_NAME) {

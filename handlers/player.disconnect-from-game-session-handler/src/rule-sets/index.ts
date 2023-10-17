@@ -1,1 +1,1 @@
-export * from "./disconnect-from-game-session/index.js";
+export * from "./disconnect-from-game-session";

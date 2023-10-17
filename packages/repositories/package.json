@@ -1,8 +1,7 @@
 {
   "name": "@oigamez/repositories",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "type": "module",
+  "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.425.0",

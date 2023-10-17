@@ -10,13 +10,13 @@ import {
 } from "@oigamez/responses";
 import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 
-import { validateEnvironment } from "./configuration/index.js";
+import { validateEnvironment } from "./configuration";
 import {
   clearPlayerConnection,
   removePlayerAndUpdateGameSession,
-} from "./repositories/index.js";
-import { runDisconnectFromGameSessionRuleSet } from "./rule-sets/index.js";
-import { validateConnectionId } from "./validators/index.js";
+} from "./repositories";
+import { runDisconnectFromGameSessionRuleSet } from "./rule-sets";
+import { validateConnectionId } from "./validators";
 
 validateEnvironment();
 

@@ -5,7 +5,7 @@ import {
   getDynamoString,
 } from "@oigamez/dynamodb";
 
-import { Question } from "../../models/index.js";
+import { Question } from "../../models";
 
 export const getFirstQuestionAndCountFromDynamo = (
   dynamoQuestions: AttributeValue

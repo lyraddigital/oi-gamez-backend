@@ -1,1 +1,1 @@
-export * from "./disconnect-from-game-session-rule-set.js";
+export * from "./disconnect-from-game-session-rule-set";

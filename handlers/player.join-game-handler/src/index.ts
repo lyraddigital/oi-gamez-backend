@@ -15,11 +15,11 @@ import {
   createUniqueSessionId,
 } from "@oigamez/services";
 
-import { validateEnvironment } from "./configuration/index.js";
-import { JoinGamePayload } from "./models/index.js";
-import { createPlayer } from "./repositories/index.js";
-import { runJoinGameRuleSet } from "./rule-sets/index.js";
-import { validateRequest } from "./validators/index.js";
+import { validateEnvironment } from "./configuration";
+import { JoinGamePayload } from "./models";
+import { createPlayer } from "./repositories";
+import { runJoinGameRuleSet } from "./rule-sets";
+import { validateRequest } from "./validators";
 
 validateEnvironment();
 

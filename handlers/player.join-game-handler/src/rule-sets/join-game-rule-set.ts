@@ -1,8 +1,8 @@
 import { GameSession } from "@oigamez/repositories";
 import { RuleSetResult } from "@oigamez/rule-sets";
 
-import { runGameSessionRuleSet } from "./game-session/index.js";
-import { runUniqueUsernameRuleSet } from "./username-unique/index.js";
+import { runGameSessionRuleSet } from "./game-session";
+import { runUniqueUsernameRuleSet } from "./username-unique";
 
 export const runJoinGameRuleSet = (
   gameSession: GameSession,

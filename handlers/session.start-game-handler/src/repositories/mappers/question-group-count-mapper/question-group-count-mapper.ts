@@ -1,7 +1,7 @@
 import { AttributeValue } from "@aws-sdk/client-dynamodb";
 import { dynamoFieldNames, getDynamoInt } from "@oigamez/dynamodb";
 
-import { QuestionGroupCount } from "../../../models/index.js";
+import { QuestionGroupCount } from "../../../models";
 
 export const mapFromDynamoToQuestionGroupCount = (
   dynamoRecord: Record<string, AttributeValue>

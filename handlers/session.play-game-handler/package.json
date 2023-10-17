@@ -1,8 +1,7 @@
 {
   "name": "@oigamez/session.play-game-handler",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "type": "module",
+  "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
     "aws-lambda": "^1.0.7",

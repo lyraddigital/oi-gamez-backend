@@ -14,7 +14,7 @@ import {
   stringAttribute,
 } from "@oigamez/dynamodb";
 
-import { GameSessionQuestionDetails } from "../../models/index.js";
+import { GameSessionQuestionDetails } from "../../models";
 
 export const updateGameWithQuestionGroupDetails = async ({
   sessionId,

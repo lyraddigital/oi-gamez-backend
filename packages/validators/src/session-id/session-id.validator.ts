@@ -1,4 +1,4 @@
-import { ValidationResult } from "../models/index.js";
+import { ValidationResult } from "../models";
 
 export const validateSessionId = (sessionId: string): ValidationResult => {
   if (!sessionId) {

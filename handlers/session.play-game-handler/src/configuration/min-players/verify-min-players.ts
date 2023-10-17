@@ -1,4 +1,4 @@
-import { GAME_SESSION_MIN_PLAYERS } from "./min-players.js";
+import { GAME_SESSION_MIN_PLAYERS } from "./min-players";
 
 export const verifyMinPlayers = (): void => {
   if (isNaN(GAME_SESSION_MIN_PLAYERS)) {

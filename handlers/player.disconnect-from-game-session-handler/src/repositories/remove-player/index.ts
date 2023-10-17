@@ -1,1 +1,1 @@
-export * from "./remove-player.repository.js";
+export * from "./remove-player.repository";

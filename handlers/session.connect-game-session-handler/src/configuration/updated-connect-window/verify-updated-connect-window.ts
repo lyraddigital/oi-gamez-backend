@@ -1,4 +1,4 @@
-import { UPDATED_CONNECT_WINDOW_IN_SECONDS } from "./updated-connect-window.js";
+import { UPDATED_CONNECT_WINDOW_IN_SECONDS } from "./updated-connect-window";
 
 export const verifyUpdatedConnectWindowInSeconds = (): void => {
   if (!UPDATED_CONNECT_WINDOW_IN_SECONDS) {

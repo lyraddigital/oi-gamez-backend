@@ -1,1 +1,1 @@
-export * from "./game-code.validator.js";
+export * from "./game-code.validator";

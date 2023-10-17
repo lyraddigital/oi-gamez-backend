@@ -1,1 +1,1 @@
-export * from "./update-player-and-game-session.js";
+export * from "./update-player-and-game-session";

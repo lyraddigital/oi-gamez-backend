@@ -1,1 +1,1 @@
-export * from "./connection-id.validator.js";
+export * from "./connection-id.validator";

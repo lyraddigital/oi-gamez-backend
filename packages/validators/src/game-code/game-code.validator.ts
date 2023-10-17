@@ -1,6 +1,6 @@
 import { GAME_CODE_LENGTH } from "@oigamez/configuration";
 
-import { ValidationResult } from "../models/index.js";
+import { ValidationResult } from "../models";
 
 export const validateGameCode = (gameCode: string): ValidationResult => {
   const errorMessages: string[] = [];

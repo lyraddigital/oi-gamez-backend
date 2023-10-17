@@ -4,7 +4,7 @@ import {
   validateOrigin,
 } from "@oigamez/validators";
 
-import { validateUsername } from "./username-validator/index.js";
+import { validateUsername } from "./username-validator";
 
 export const validateRequest = (
   origin: string,

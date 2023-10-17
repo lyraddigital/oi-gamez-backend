@@ -1,4 +1,4 @@
-import { GAME_SESSION_MAX_PLAYERS } from "./max-players.js";
+import { GAME_SESSION_MAX_PLAYERS } from "./max-players";
 
 export const verifyMaxPlayers = (): void => {
   if (isNaN(GAME_SESSION_MAX_PLAYERS)) {

@@ -1,1 +1,1 @@
-export * from "./cors-origin.validator.js";
+export * from "./cors-origin.validator";

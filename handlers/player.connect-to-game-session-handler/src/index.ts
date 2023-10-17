@@ -10,9 +10,9 @@ import { getGameSession, getPlayerBySessionId } from "@oigamez/repositories";
 import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 import { validateSessionId } from "@oigamez/validators";
 
-import { validateEnvironment } from "./configuration/index.js";
-import { updatePlayerAndGameSession } from "./repositories/index.js";
-import { runConnectToGameSessionRuleSet } from "./rule-sets/index.js";
+import { validateEnvironment } from "./configuration";
+import { updatePlayerAndGameSession } from "./repositories";
+import { runConnectToGameSessionRuleSet } from "./rule-sets";
 
 validateEnvironment();
 

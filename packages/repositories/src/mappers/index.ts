@@ -1,2 +1,2 @@
-export * from "./game-session-mapper/index.js";
-export * from "./player-mapper/index.js";
+export * from "./game-session-mapper";
+export * from "./player-mapper";

@@ -1,1 +1,1 @@
-export * from "./choose-option-request-payload.js";
+export * from "./choose-option-request-payload";

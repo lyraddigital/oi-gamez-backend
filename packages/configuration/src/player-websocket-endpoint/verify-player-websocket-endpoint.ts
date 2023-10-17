@@ -1,4 +1,4 @@
-import { PLAYER_WEBSOCKET_ENDPOINT } from "./player-websocket-endpoint.js";
+import { PLAYER_WEBSOCKET_ENDPOINT } from "./player-websocket-endpoint";
 
 export const verifyPlayerWebsocketEndpoint = (): void => {
   if (!PLAYER_WEBSOCKET_ENDPOINT) {

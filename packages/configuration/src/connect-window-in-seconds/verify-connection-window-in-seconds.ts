@@ -1,4 +1,4 @@
-import { CONNECT_WINDOW_IN_SECONDS } from "./connection-window-in-seconds.js";
+import { CONNECT_WINDOW_IN_SECONDS } from "./connection-window-in-seconds";
 
 export const verifyConnectionWindowInSeconds = (): void => {
   if (isNaN(CONNECT_WINDOW_IN_SECONDS)) {

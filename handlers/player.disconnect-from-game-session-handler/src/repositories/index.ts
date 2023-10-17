@@ -1,2 +1,2 @@
-export * from "./clear-player-connection/index.js";
-export * from "./remove-player/index.js";
+export * from "./clear-player-connection";
+export * from "./remove-player";

@@ -1,1 +1,1 @@
-export * from "./player-mapper.js";
+export * from "./player-mapper";

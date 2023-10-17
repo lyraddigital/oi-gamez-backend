@@ -6,9 +6,9 @@ import {
 } from "@oigamez/responses";
 import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 
-import { validateEnvironment } from "./configuration/index.js";
-import { getGameStatus } from "./services/index.js";
-import { validateRequest } from "./validators/index.js";
+import { validateEnvironment } from "./configuration";
+import { getGameStatus } from "./services";
+import { validateRequest } from "./validators";
 
 validateEnvironment();
 

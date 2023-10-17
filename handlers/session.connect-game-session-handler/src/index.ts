@@ -15,10 +15,10 @@ import { validateSessionId } from "@oigamez/validators";
 import {
   UPDATED_CONNECT_WINDOW_IN_SECONDS,
   validateEnvironment,
-} from "./configuration/index.js";
-import { UpdatedGameSession } from "./models/index.js";
-import { updateGameSessionWithConnectionDetails } from "./repositories/index.js";
-import { runGameSessionRuleSet } from "./rule-sets/index.js";
+} from "./configuration";
+import { UpdatedGameSession } from "./models";
+import { updateGameSessionWithConnectionDetails } from "./repositories";
+import { runGameSessionRuleSet } from "./rule-sets";
 
 validateEnvironment();
 

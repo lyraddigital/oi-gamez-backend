@@ -1,1 +1,1 @@
-export * from "./communication-service.js";
+export * from "./communication-service";

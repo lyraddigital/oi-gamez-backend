@@ -1,1 +1,1 @@
-export * from "./game-session-mapper.js";
+export * from "./game-session-mapper";

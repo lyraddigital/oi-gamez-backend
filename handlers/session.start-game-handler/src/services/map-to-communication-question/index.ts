@@ -1,1 +1,1 @@
-export * from "./map-to-communication-question.service.js";
+export * from "./map-to-communication-question.service";

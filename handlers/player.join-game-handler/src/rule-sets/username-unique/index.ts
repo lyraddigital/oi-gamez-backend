@@ -1,1 +1,1 @@
-export * from "./username-unique-rule-set.js";
+export * from "./username-unique-rule-set";

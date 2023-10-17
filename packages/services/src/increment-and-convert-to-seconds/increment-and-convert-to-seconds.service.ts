@@ -1,4 +1,4 @@
-import { convertFromMillisecondsToSeconds } from "../milliseconds-to-seconds/index.js";
+import { convertFromMillisecondsToSeconds } from "../milliseconds-to-seconds";
 
 export const incrementAndReturnInSeconds = (
   ttlInMilliseconds: number,

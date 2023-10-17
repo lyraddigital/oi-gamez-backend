@@ -1,10 +1,10 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { corsBadRequestResponse, fatalErrorResponse } from "@oigamez/responses";
-import { convertFromMillisecondsToSeconds } from "@oigamez/services";
+// import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 
-import { validateEnvironment } from "./configuration/index.js";
-import { ChooseOptionRequestPayload } from "./models/index.js";
-import { validateRequest } from "./validators/index.js";
+import { validateEnvironment } from "./configuration";
+import { ChooseOptionRequestPayload } from "./models";
+import { validateRequest } from "./validators";
 
 validateEnvironment();
 
@@ -14,8 +14,8 @@ export const handler = async (
   try {
     const origin = event.headers["origin"];
     const playerSessionId = event.queryStringParameters["sessionId"];
-    const epochTime = event.requestContext.requestTimeEpoch;
-    const ttl = convertFromMillisecondsToSeconds(epochTime);
+    // const epochTime = event.requestContext.requestTimeEpoch;
+    // const ttl = convertFromMillisecondsToSeconds(epochTime);
     let optionId: string;
 
     try {

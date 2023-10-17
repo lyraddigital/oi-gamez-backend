@@ -4,7 +4,7 @@ import {
   ValidationResult,
 } from "@oigamez/validators";
 
-import { validateOptionId } from "./option-id/index.js";
+import { validateOptionId } from "./option-id";
 
 export const validateRequest = (
   origin: string,

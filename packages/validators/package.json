@@ -1,8 +1,7 @@
 {
   "name": "@oigamez/validators",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "type": "module",
+  "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {    
     "@oigamez/configuration": "1.0.0"

@@ -1,1 +1,1 @@
-export * from "./get-game-status/index.js";
+export * from "./get-game-status";

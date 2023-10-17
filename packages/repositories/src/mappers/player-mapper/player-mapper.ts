@@ -1,7 +1,7 @@
 import { AttributeValue } from "@aws-sdk/client-dynamodb";
 import { dynamoFieldNames, getDynamoString } from "@oigamez/dynamodb";
 
-import { Player } from "../../models/index.js";
+import { Player } from "../../models";
 
 export const mapFromDynamoToPlayer = (
   dynamoRecord: Record<string, AttributeValue>

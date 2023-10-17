@@ -1,4 +1,4 @@
-import createGameSession from "./game-session-create.repository.js";
-import getAllActiveGameCodes from "./active-codes.repository.js";
+import createGameSession from "./game-session-create.repository";
+import getAllActiveGameCodes from "./active-codes.repository";
 
 export { createGameSession, getAllActiveGameCodes };

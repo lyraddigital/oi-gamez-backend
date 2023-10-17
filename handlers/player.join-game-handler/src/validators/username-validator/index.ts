@@ -1,1 +1,1 @@
-export * from "./username-validator.js";
+export * from "./username-validator";

@@ -1,2 +1,2 @@
-export * from "./min-players.js";
-export * from "./verify-min-players.js";
+export * from "./min-players";
+export * from "./verify-min-players";

@@ -1,8 +1,7 @@
 {
   "name": "@oigamez/services",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "type": "module",
+  "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
     "uuid": "^8.3.2"

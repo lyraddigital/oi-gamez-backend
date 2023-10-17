@@ -12,7 +12,7 @@ import {
   keys,
 } from "@oigamez/dynamodb";
 
-import { GameSessionToCreate } from "../models/index.js";
+import { GameSessionToCreate } from "../models";
 
 const createGameSession = async ({
   gameCode,

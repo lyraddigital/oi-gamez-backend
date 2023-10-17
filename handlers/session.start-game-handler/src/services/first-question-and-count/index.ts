@@ -1,1 +1,1 @@
-export * from "./first-question-and-count.service.js";
+export * from "./first-question-and-count.service";

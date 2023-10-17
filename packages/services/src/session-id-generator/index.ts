@@ -1,1 +1,1 @@
-export * from "./session-id-generator.service.js";
+export * from "./session-id-generator.service";

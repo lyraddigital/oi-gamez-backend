@@ -1,1 +1,1 @@
-export * from "./get-player-by-connection-id.js";
+export * from "./get-player-by-connection-id";

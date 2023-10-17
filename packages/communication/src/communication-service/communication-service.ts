@@ -1,6 +1,6 @@
 import { PostToConnectionCommand } from "@aws-sdk/client-apigatewaymanagementapi";
 
-import { getClient } from "../client/index.js";
+import { getClient } from "../client";
 
 export const sendCommunicationEvent = async <T>(
   endpoint: string,

@@ -1,4 +1,4 @@
-import { Option } from "../option/option.js";
+import { Option } from "../option/option";
 
 export interface Question {
   text: string;

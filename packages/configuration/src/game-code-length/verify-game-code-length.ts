@@ -1,4 +1,4 @@
-import { GAME_CODE_LENGTH } from "./game-code-length.js";
+import { GAME_CODE_LENGTH } from "./game-code-length";
 
 export const verifyGameCodeLength = (): void => {
   if (!GAME_CODE_LENGTH) {

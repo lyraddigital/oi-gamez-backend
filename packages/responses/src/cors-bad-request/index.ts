@@ -1,1 +1,1 @@
-export * from "./cors-bad-request.js";
+export * from "./cors-bad-request";

@@ -1,1 +1,1 @@
-export * from "./connection-id/index.js";
+export * from "./connection-id";

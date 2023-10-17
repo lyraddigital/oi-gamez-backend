@@ -1,1 +1,1 @@
-export * from "./start-game-rule-set.js";
+export * from "./start-game-rule-set";

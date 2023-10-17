@@ -1,12 +1,12 @@
 import { AttributeValue } from "@aws-sdk/client-dynamodb";
 
-import { Types } from "./enums.js";
+import { Types } from "./enums";
 import {
   DynamoConditionalExpressions,
   DynamoFieldNames,
   DynamoFieldValues,
   DynamoKeys,
-} from "./types.js";
+} from "./types";
 
 export const numberAttribute = (
   numberValue: number
