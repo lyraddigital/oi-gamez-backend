@@ -28,9 +28,7 @@ export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const sessionId = event.headers
-      ? event.headers["api-session-id"]
-      : undefined;
+    const sessionId = event.headers["api-session-id"];
     const epochTime = event.requestContext.requestTimeEpoch;
     const validationResult = validateSessionId(sessionId);
 

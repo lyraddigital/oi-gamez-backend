@@ -51,6 +51,9 @@ interface GameSessionFieldValues {
   currentNumberOfPlayers: (count: number) => AttributeValue.NMember;
   connectionId: (connectionId: string) => AttributeValue.SMember;
   gameCode: (gameCode: string) => AttributeValue.SMember;
+  isAllowingSubmissions: (
+    isAllowingSubmissions: boolean
+  ) => AttributeValue.BOOLMember;
   minPlayers: (minPlayers: number) => AttributeValue.NMember;
   maxPlayers: (maxPlayers: number) => AttributeValue.NMember;
   sessionId: (sessionId: string) => AttributeValue.SMember;
