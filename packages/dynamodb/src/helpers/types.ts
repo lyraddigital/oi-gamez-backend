@@ -30,6 +30,7 @@ interface PlayerFieldNames {
   sessionId: string;
   username: string;
   connectionId: string;
+  choices: string;
 }
 
 interface QuestionGroupCountFieldNames {
@@ -66,6 +67,7 @@ interface PlayerFieldValues {
   sessionId: (playerSessionId: string) => AttributeValue.SMember;
   username: (username: string) => AttributeValue.SMember;
   connectionId: (connectionId: string) => AttributeValue.SMember;
+  choices: (choices: Map<number, string>) => AttributeValue.MMember;
 }
 
 interface QuestionGroupFieldValues {

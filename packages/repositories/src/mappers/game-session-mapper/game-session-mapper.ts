@@ -3,6 +3,7 @@ import {
   dynamoFieldNames,
   getDynamoInt,
   getDynamoString,
+  getDynamoBoolean,
 } from "@oigamez/dynamodb";
 
 import { GameSession } from "../../models";
@@ -18,11 +19,17 @@ export const mapFromDynamoToGameSession = (
     currentNumberOfPlayers: getDynamoInt(
       dynamoRecord[dynamoFieldNames.gameSession.currentNumberOfPlayers]
     ),
+    currentQuestionNumber: getDynamoInt(
+      dynamoRecord[dynamoFieldNames.gameSession.currentQuestionNumber]
+    ),
     connectionId: getDynamoString(
       dynamoRecord[dynamoFieldNames.gameSession.connectionId]
     ),
     gameCode: getDynamoString(
       dynamoRecord[dynamoFieldNames.gameSession.gameCode]
+    ),
+    isAllowingSubmissions: getDynamoBoolean(
+      dynamoRecord[dynamoFieldNames.gameSession.isAllowingSubmissions]
     ),
     minPlayers: getDynamoInt(
       dynamoRecord[dynamoFieldNames.gameSession.minPlayers]

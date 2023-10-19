@@ -3,4 +3,5 @@ export interface Player {
   hostSessionId: string;
   connectionId: string;
   sessionId: string;
+  choices?: Map<number, string>;
 }

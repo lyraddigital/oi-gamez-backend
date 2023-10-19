@@ -51,6 +51,12 @@ export const getDynamoList = (
   return dynamoField?.L || [];
 };
 
+export const getDynamoBoolean = (
+  dynamoField: AttributeValue
+): boolean | undefined => {
+  return dynamoField?.BOOL;
+};
+
 export const getDynamoMap = (dynamoField: AttributeValue) => {
   return dynamoField?.M;
 };
@@ -83,6 +89,7 @@ export const dynamoFieldNames: DynamoFieldNames = {
     sessionId: "PlayerSessionId",
     username: "Username",
     connectionId: "PlayerConnectionId",
+    choices: "QuestionChoices",
   },
   questionGroupCount: {
     questionGroupCount: "QuestionGroupCount",
@@ -124,6 +131,15 @@ export const dynamoFieldValues: DynamoFieldValues = {
     sessionId: (playerSessionId) => stringAttribute(playerSessionId),
     username: (username) => stringAttribute(username),
     connectionId: (connectionId) => stringAttribute(connectionId),
+    choices: (choices) => {
+      const choiceDynamoMap: AttributeValue.MMember = { M: {} };
+
+      choices.forEach((value: string, key: number) => {
+        choiceDynamoMap.M[key.toString()] = stringAttribute(value);
+      });
+
+      return choiceDynamoMap;
+    },
   },
   questionGroup: {
     pk: (questionGroupNumber: number) =>

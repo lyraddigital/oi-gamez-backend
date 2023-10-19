@@ -1,10 +1,17 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { corsBadRequestResponse, fatalErrorResponse } from "@oigamez/responses";
-// import { convertFromMillisecondsToSeconds } from "@oigamez/services";
+import { getGameSession, getPlayerBySessionId } from "@oigamez/repositories";
+import {
+  corsBadRequestResponse,
+  corsOkResponse,
+  fatalErrorResponse,
+} from "@oigamez/responses";
+import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 
 import { validateEnvironment } from "./configuration";
 import { ChooseOptionRequestPayload } from "./models";
+import { runGameSessionRuleSet, runPlayerRuleSet } from "./rule-sets";
 import { validateRequest } from "./validators";
+import { updatePlayerChoices } from "./repositories";
 
 validateEnvironment();
 
@@ -14,8 +21,7 @@ export const handler = async (
   try {
     const origin = event.headers["origin"];
     const playerSessionId = event.queryStringParameters["sessionId"];
-    // const epochTime = event.requestContext.requestTimeEpoch;
-    // const ttl = convertFromMillisecondsToSeconds(epochTime);
+    const epochTime = event.requestContext.requestTimeEpoch;
     let optionId: string;
 
     try {
@@ -35,7 +41,31 @@ export const handler = async (
       return corsBadRequestResponse(requestValidationResult.errorMessages);
     }
 
-    // return corsOkResponseWithData(await getGameStatus(gameCode, ttl));
+    const ttl = convertFromMillisecondsToSeconds(epochTime);
+    const player = await getPlayerBySessionId(playerSessionId, ttl);
+    const playerRuleSet = runPlayerRuleSet(player);
+
+    if (!playerRuleSet.isSuccessful) {
+      return corsBadRequestResponse(playerRuleSet.errorMessages);
+    }
+
+    const gameSession = await getGameSession(player.hostSessionId, ttl);
+    const gameSessionRuleSet = runGameSessionRuleSet(gameSession);
+
+    if (!gameSessionRuleSet.isSuccessful) {
+      return corsBadRequestResponse(gameSessionRuleSet.errorMessages);
+    }
+
+    player.choices = player.choices || new Map<number, string>();
+    player.choices.set(gameSession.currentQuestionNumber, optionId);
+
+    await updatePlayerChoices(
+      player.sessionId,
+      player.hostSessionId,
+      player.choices
+    );
+
+    return corsOkResponse();
   } catch (e) {
     console.log(e);
 
@@ -47,10 +77,10 @@ export const handler = async (
 
 (async () => {
   const response = await handler({
-    queryStringParameters: { sessionId: "393948484" },
+    queryStringParameters: { sessionId: "1710810a1ad0422d94f2774bcd1a4fb5" },
     headers: { origin: "https://oigamez.com" },
     pathParameters: {},
-    body: JSON.stringify({ optionId: "39384484" }),
+    body: JSON.stringify({ optionId: "2" }),
     requestContext: {
       authorizer: null,
       identity: null,
