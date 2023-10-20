@@ -6,18 +6,7 @@ import {
 } from "@oigamez/dynamodb";
 
 import { Player } from "../../models";
-
-const convertToChoiceMap = (
-  dynamoMap: Record<string, AttributeValue>
-): Map<number, string> => {
-  const choiceMap: Map<number, string> = new Map<number, string>();
-
-  Object.keys(dynamoMap).forEach((questionNumber: string) => {
-    choiceMap.set(parseInt(questionNumber, 10), dynamoMap[questionNumber].S);
-  });
-
-  return choiceMap;
-};
+import { convertDynamoMapToMapMapper } from "../dynamo-map-to-map-mapper";
 
 export const mapFromDynamoToPlayer = (
   dynamoRecord: Record<string, AttributeValue>
@@ -30,7 +19,7 @@ export const mapFromDynamoToPlayer = (
     connectionId: getDynamoString(
       dynamoRecord[dynamoFieldNames.player.connectionId]
     ),
-    choices: convertToChoiceMap(
+    choices: convertDynamoMapToMapMapper(
       getDynamoMap(dynamoRecord[dynamoFieldNames.player.choices])
     ),
     sessionId: getDynamoString(dynamoRecord[dynamoFieldNames.player.sessionId]),

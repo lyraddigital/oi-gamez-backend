@@ -4,14 +4,19 @@ import {
   getDynamoInt,
   getDynamoString,
   getDynamoBoolean,
+  getDynamoMap,
 } from "@oigamez/dynamodb";
 
 import { GameSession } from "../../models";
+import { convertDynamoMapToMapMapper } from "../dynamo-map-to-map-mapper";
 
 export const mapFromDynamoToGameSession = (
   dynamoRecord: Record<string, AttributeValue>
 ): GameSession => {
   return {
+    answers: convertDynamoMapToMapMapper(
+      getDynamoMap(dynamoRecord[dynamoFieldNames.gameSession.answers])
+    ),
     sessionId: getDynamoString(
       dynamoRecord[dynamoFieldNames.gameSession.sessionId]
     ),

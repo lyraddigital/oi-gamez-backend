@@ -3,6 +3,7 @@ export interface GameSession {
   status: string;
   currentNumberOfPlayers: number;
   currentQuestionNumber?: number;
+  answers?: Map<number, string>;
   connectionId: string;
   gameCode: string;
   isAllowingSubmissions?: boolean;
