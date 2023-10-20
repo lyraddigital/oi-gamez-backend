@@ -1,0 +1,16 @@
+{
+  "name": "@oigamez/session.get-next-question-handler",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "aws-lambda": "^1.0.7"
+  },
+  "devDependencies": {    
+    "env-cmd": "^10.1.0",
+    "@types/aws-lambda": "^8.10.124"
+  },
+  "scripts": {
+    "start": "env-cmd -f .env ts-node-esm ./src/index.ts"
+  }
+}

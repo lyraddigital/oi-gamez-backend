@@ -10,4 +10,5 @@ export interface GameSession {
   minPlayers: number;
   maxPlayers: number;
   ttl: number;
+  questions?: string[];
 }

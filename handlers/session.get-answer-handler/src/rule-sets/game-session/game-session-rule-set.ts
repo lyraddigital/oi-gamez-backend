@@ -6,7 +6,7 @@ export const runGameSessionRuleResult = (
 ): RuleSetResult => {
   if (!gameSession) {
     return {
-      isSuccessful: true,
+      isSuccessful: false,
       errorMessages: [
         "Could not find the game session that matches the passed in session id.",
       ],
