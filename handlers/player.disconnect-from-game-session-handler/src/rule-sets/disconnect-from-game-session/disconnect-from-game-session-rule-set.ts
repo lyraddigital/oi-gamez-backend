@@ -1,5 +1,5 @@
 import { GameSessionStatuses } from "@oigamez/dynamodb";
-import { GameSession, Player } from "@oigamez/repositories";
+import { GameSession, Player } from "@oigamez/models";
 import { RuleSetResult } from "@oigamez/rule-sets";
 
 const runPlayerRuleSet = (player: Player): RuleSetResult => {

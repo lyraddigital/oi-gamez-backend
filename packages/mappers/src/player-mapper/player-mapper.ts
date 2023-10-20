@@ -4,8 +4,8 @@ import {
   getDynamoString,
   getDynamoMap,
 } from "@oigamez/dynamodb";
+import { Player } from "@oigamez/models";
 
-import { Player } from "../../models";
 import { convertDynamoMapToMapMapper } from "../dynamo-map-to-map-mapper";
 
 export const mapFromDynamoToPlayer = (

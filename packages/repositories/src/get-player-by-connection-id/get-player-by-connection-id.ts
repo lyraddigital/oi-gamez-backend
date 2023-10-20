@@ -6,9 +6,8 @@ import {
   dynamoFieldValues,
   IndexNames,
 } from "@oigamez/dynamodb";
-
-import { mapFromDynamoToPlayer } from "../mappers";
-import { Player } from "../models";
+import { mapFromDynamoToPlayer } from "@oigamez/mappers";
+import { Player } from "@oigamez/models";
 
 export const getPlayerByConnectionId = async (
   connectionId: string,

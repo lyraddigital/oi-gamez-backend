@@ -1,4 +1,4 @@
-import { GameSession } from "@oigamez/repositories";
+import { GameSession } from "@oigamez/models";
 import { RuleSetResult } from "@oigamez/rule-sets";
 
 import { runGameSessionRuleSet } from "./game-session";

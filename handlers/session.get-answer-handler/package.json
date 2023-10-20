@@ -8,6 +8,7 @@
     "@aws-sdk/client-dynamodb": "^3.425.0",
     "@oigamez/configuration": "1.0.0",
     "@oigamez/dynamodb": "1.0.0",
+    "@oigamez/models": "1.0.0",
     "@oigamez/responses": "1.0.0",
     "@oigamez/repositories": "1.0.0",
     "@oigamez/rule-sets": "1.0.0",

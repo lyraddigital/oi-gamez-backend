@@ -1,4 +1,4 @@
-import { Player } from "@oigamez/repositories";
+import { Player } from "@oigamez/models";
 import { RuleSetResult } from "@oigamez/rule-sets";
 
 export const runPlayerRuleSet = (player: Player): RuleSetResult => {

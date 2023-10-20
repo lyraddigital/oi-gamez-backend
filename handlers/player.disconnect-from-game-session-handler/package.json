@@ -8,6 +8,7 @@
     "@oigamez/configuration": "1.0.0",
     "@oigamez/communication": "1.0.0",
     "@oigamez/dynamodb": "1.0.0",
+    "@oigamez/models": "1.0.0",
     "@oigamez/repositories": "1.0.0",
     "@oigamez/responses": "1.0.0",
     "@oigamez/services": "1.0.0"

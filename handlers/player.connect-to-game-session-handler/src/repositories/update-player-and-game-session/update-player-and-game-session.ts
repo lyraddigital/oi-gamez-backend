@@ -14,7 +14,7 @@ import {
   stringAttribute,
 } from "@oigamez/dynamodb";
 
-import { UpdatePlayerAndGameSession } from "../../models/update-player-and-game-session";
+import { UpdatePlayerAndGameSession } from "../../models";
 
 export const updatePlayerAndGameSession = async ({
   playerSessionId,

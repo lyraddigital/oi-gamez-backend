@@ -1,4 +1,4 @@
-import { GameSession } from "@oigamez/repositories";
+import { GameSession } from "@oigamez/models";
 
 export const getQuestionDetailsFromGameSession = (
   gameSession: GameSession

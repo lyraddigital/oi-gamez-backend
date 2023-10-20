@@ -1,13 +1,11 @@
 {
-  "name": "@oigamez/repositories",
+  "name": "@oigamez/mappers",
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.425.0",
-    "@oigamez/configuration": "1.0.0",
     "@oigamez/dynamodb": "1.0.0",
-    "@oigamez/mappers": "1.0.0",
     "@oigamez/models": "1.0.0"
   }
 }

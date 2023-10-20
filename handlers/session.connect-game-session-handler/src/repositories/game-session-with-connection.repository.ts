@@ -11,7 +11,7 @@ import {
   keys,
 } from "@oigamez/dynamodb";
 
-import { UpdatedGameSession } from "../models/updated-game-session";
+import { UpdatedGameSession } from "../models";
 
 const updateGameSessionWithConnectionDetails = async (
   updatedGameSession: UpdatedGameSession

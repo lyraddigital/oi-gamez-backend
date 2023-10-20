@@ -10,7 +10,7 @@ import {
   keys,
 } from "@oigamez/dynamodb";
 
-import { ClearPlayerConnection } from "../../models/clear-player-connection";
+import { ClearPlayerConnection } from "../../models";
 
 export const clearPlayerConnection = async ({
   hostSessionId,

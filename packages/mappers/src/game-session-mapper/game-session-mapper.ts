@@ -6,8 +6,8 @@ import {
   getDynamoBoolean,
   getDynamoMap,
 } from "@oigamez/dynamodb";
+import { GameSession } from "@oigamez/models";
 
-import { GameSession } from "../../models";
 import { convertDynamoMapToMapMapper } from "../dynamo-map-to-map-mapper";
 
 export const mapFromDynamoToGameSession = (
