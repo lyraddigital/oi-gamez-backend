@@ -15,6 +15,7 @@ const scanTable = async () => {
       response.Items.filter((i) => i["SessionId"]?.S).map((i) => ({
         sessionId: i["SessionId"]?.S,
         gameCode: i["GameCode"]?.S,
+        status: i["Status"]?.S,
       })),
       undefined,
       2
