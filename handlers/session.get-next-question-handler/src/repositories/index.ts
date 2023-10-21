@@ -1,2 +1,1 @@
-export * from "./current-question-and-answer";
-export * from "./disallow-submissions";
+export * from "./update-current-question-and-allow-submissions";

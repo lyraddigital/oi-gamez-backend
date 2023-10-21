@@ -9,6 +9,7 @@ import {
 import { GameSession } from "@oigamez/models";
 
 import { convertDynamoMapToMapMapper } from "../dynamo-map-to-map-mapper";
+import { mapQuestions } from "../questions-mapper";
 
 export const mapFromDynamoToGameSession = (
   dynamoRecord: Record<string, AttributeValue>
@@ -41,6 +42,9 @@ export const mapFromDynamoToGameSession = (
     ),
     maxPlayers: getDynamoInt(
       dynamoRecord[dynamoFieldNames.gameSession.maxPlayers]
+    ),
+    questions: mapQuestions(
+      dynamoRecord[dynamoFieldNames.gameSession.questions]
     ),
     ttl: getDynamoInt(dynamoRecord[dynamoFieldNames.common.ttl]),
   };

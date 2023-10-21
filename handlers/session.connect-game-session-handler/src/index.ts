@@ -69,7 +69,7 @@ export const handler = async (
 (async () => {
   const event: APIGatewayProxyEvent = {
     queryStringParameters: {
-      sessionId: "c577639cbde246ef97e7b796fd28fa40",
+      sessionId: "d4b76a6dc6914d82b3b44e62facb5f56",
     },
     headers: {},
     pathParameters: {},

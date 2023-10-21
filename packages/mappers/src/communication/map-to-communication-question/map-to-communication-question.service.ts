@@ -1,4 +1,4 @@
-import { Option, Question } from "../../models";
+import { Option, Question } from "@oigamez/models";
 
 export const mapToCommunicationQuestion = (question: Question) => {
   return {

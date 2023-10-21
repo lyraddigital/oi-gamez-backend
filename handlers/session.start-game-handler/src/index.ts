@@ -1,6 +1,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { PLAYER_WEBSOCKET_ENDPOINT } from "@oigamez/configuration";
 import { sendCommunicationEvent } from "@oigamez/communication";
+import { mapToCommunicationQuestion } from "@oigamez/mappers";
 import { getGameSession, getPlayersInGameSession } from "@oigamez/repositories";
 import {
   okResponseWithData,
@@ -17,10 +18,7 @@ import {
   updateGameWithQuestionGroupDetails,
 } from "./repositories";
 import { runStartGameRuleSet } from "./rule-sets";
-import {
-  getFirstQuestionAndCountFromDynamo,
-  mapToCommunicationQuestion,
-} from "./services";
+import { getFirstQuestionAndCountFromDynamo } from "./services";
 
 validateEnvironment();
 
@@ -94,7 +92,7 @@ export const handler = async (
 (async () => {
   const event: APIGatewayProxyEvent = {
     headers: {
-      ["api-session-id"]: "c577639cbde246ef97e7b796fd28fa40",
+      ["api-session-id"]: "d4b76a6dc6914d82b3b44e62facb5f56",
     },
     queryStringParameters: {},
     requestContext: {

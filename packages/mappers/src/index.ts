@@ -1,2 +1,2 @@
-export * from "./game-session-mapper";
-export * from "./player-mapper";
+export * from "./communication";
+export * from "./dynamo";

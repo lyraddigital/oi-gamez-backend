@@ -19,7 +19,8 @@
   },
   "workspaces": [
     "handlers/*",
-    "packages/*"
+    "packages/*",
+    "utilities/*"
   ],
   "engines": {
     "node": ">=18.17.1"

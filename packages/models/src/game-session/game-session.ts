@@ -1,3 +1,5 @@
+import { Question } from "../question";
+
 export interface GameSession {
   sessionId: string;
   status: string;
@@ -10,5 +12,5 @@ export interface GameSession {
   minPlayers: number;
   maxPlayers: number;
   ttl: number;
-  questions?: string[];
+  questions?: Question[];
 }
