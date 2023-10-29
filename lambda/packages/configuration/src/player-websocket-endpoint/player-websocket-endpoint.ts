@@ -1,0 +1,2 @@
+export const PLAYER_WEBSOCKET_ENDPOINT =
+  process.env.PLAYER_WEBSOCKET_ENDPOINT || "";
