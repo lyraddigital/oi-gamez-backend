@@ -2,6 +2,7 @@ interface EnvironmentVariables {
   playGame: PlayGameEnvironmentVariables;
   getAnswer: GetAnswerEnvironmentVariables;
   getNextQuestion: GetNextQuestionEnvironmentVariables;
+  endGame: EndGameEnvironmentVariables;
 }
 
 interface PlayGameEnvironmentVariables {
@@ -22,6 +23,11 @@ interface GetNextQuestionEnvironmentVariables {
   playerWebsocketEndpoint: string;
 }
 
+interface EndGameEnvironmentVariables {
+  tableName: string;
+  playerWebsocketEndpoint: string;
+}
+
 interface HandlerFilePaths {
   gameSession: GameSessionHandlerFilePaths;
 }
@@ -30,6 +36,7 @@ interface GameSessionHandlerFilePaths {
   playGame: string;
   getAnswer: string;
   getNextQuestion: string;
+  endGame: string;
 }
 
 interface HandlerFunctionNames {
@@ -40,6 +47,7 @@ interface GameSessionFunctionNames {
   playGame: string;
   getAnswer: string;
   getNextQuestion: string;
+  endGame: string;
 }
 
 interface ResourcePaths {
@@ -60,6 +68,10 @@ export const EnvironmentVariables: EnvironmentVariables = {
     connectWindowInSeconds: "CONNECT_WINDOW_IN_SECONDS",
     gameSessionMinPlayers: "GAME_SESSION_MIN_PLAYERS",
     gameSessionMaxPlayers: "GAME_SESSION_MAX_PLAYERS",
+  },
+  endGame: {
+    tableName: "DYNAMO_TABLE_NAME",
+    playerWebsocketEndpoint: "PLAYER_WEBSOCKET_ENDPOINT",
   },
   getAnswer: {
     tableName: "DYNAMO_TABLE_NAME",
@@ -88,6 +100,8 @@ export const HandlerFilePaths: HandlerFilePaths = {
       "../../../lambda/handlers/session/rest/get-answer-handler/src/index.ts",
     getNextQuestion:
       "../../../lambda/handlers/session/rest/get-next-question-handler/src/index.ts",
+    endGame:
+      "../../../lambda/handlers/session/rest/end-game-handler/src/index.ts",
   },
 };
 
@@ -96,5 +110,6 @@ export const HandlerFunctionNames: HandlerFunctionNames = {
     playGame: "handler",
     getAnswer: "handler",
     getNextQuestion: "handler",
+    endGame: "handler",
   },
 };
