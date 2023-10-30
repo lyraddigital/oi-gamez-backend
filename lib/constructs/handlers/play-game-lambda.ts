@@ -7,6 +7,7 @@ import {
   HandlerFunctionNames,
 } from "../../constants";
 import { PlayGameLambdaProps } from "../../props";
+
 import { RestAPIHandlerFunction } from "./rest-api-handler-function";
 
 export class PlayGameLambda extends Construct {

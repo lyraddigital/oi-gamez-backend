@@ -1,5 +1,7 @@
 interface EnvironmentVariables {
   playGame: PlayGameEnvironmentVariables;
+  getAnswer: GetAnswerEnvironmentVariables;
+  getNextQuestion: GetNextQuestionEnvironmentVariables;
 }
 
 interface PlayGameEnvironmentVariables {
@@ -10,12 +12,24 @@ interface PlayGameEnvironmentVariables {
   gameSessionMaxPlayers: string;
 }
 
+interface GetAnswerEnvironmentVariables {
+  tableName: string;
+  playerWebsocketEndpoint: string;
+}
+
+interface GetNextQuestionEnvironmentVariables {
+  tableName: string;
+  playerWebsocketEndpoint: string;
+}
+
 interface HandlerFilePaths {
   gameSession: GameSessionHandlerFilePaths;
 }
 
 interface GameSessionHandlerFilePaths {
   playGame: string;
+  getAnswer: string;
+  getNextQuestion: string;
 }
 
 interface HandlerFunctionNames {
@@ -24,6 +38,8 @@ interface HandlerFunctionNames {
 
 interface GameSessionFunctionNames {
   playGame: string;
+  getAnswer: string;
+  getNextQuestion: string;
 }
 
 interface ResourcePaths {
@@ -45,6 +61,14 @@ export const EnvironmentVariables: EnvironmentVariables = {
     gameSessionMinPlayers: "GAME_SESSION_MIN_PLAYERS",
     gameSessionMaxPlayers: "GAME_SESSION_MAX_PLAYERS",
   },
+  getAnswer: {
+    tableName: "DYNAMO_TABLE_NAME",
+    playerWebsocketEndpoint: "PLAYER_WEBSOCKET_ENDPOINT",
+  },
+  getNextQuestion: {
+    tableName: "DYNAMO_TABLE_NAME",
+    playerWebsocketEndpoint: "PLAYER_WEBSOCKET_ENDPOINT",
+  },
 };
 
 export const ResourcePaths: ResourcePaths = {
@@ -60,11 +84,17 @@ export const HandlerFilePaths: HandlerFilePaths = {
   gameSession: {
     playGame:
       "../../../lambda/handlers/session/rest/play-game-handler/src/index.ts",
+    getAnswer:
+      "../../../lambda/handlers/session/rest/get-answer-handler/src/index.ts",
+    getNextQuestion:
+      "../../../lambda/handlers/session/rest/get-next-question-handler/src/index.ts",
   },
 };
 
 export const HandlerFunctionNames: HandlerFunctionNames = {
   gameSession: {
     playGame: "handler",
+    getAnswer: "handler",
+    getNextQuestion: "handler",
   },
 };

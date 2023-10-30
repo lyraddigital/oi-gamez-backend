@@ -3,7 +3,12 @@ import { RestApi } from "aws-cdk-lib/aws-apigateway";
 
 import { ResourcePaths } from "../constants";
 import { GameSessionRestApiProps } from "../props";
-import { PlayGameLambda } from "./handlers";
+
+import {
+  GetAnswerLambda,
+  GetNextQuestionLambda,
+  PlayGameLambda,
+} from "./handlers";
 
 export class GameSessionRestApi extends Construct {
   public stageName: string;
@@ -17,12 +22,12 @@ export class GameSessionRestApi extends Construct {
     });
 
     const gameResource = api.root.addResource(ResourcePaths.gameSession.game);
-    // const answersResource = gameResource.addResource(
-    //   resourcePaths.gameSession.answers
-    // );
-    // const questionsResource = gameResource.addResource(
-    //   resourcePaths.gameSession.questions
-    // );
+    const answersResource = gameResource.addResource(
+      ResourcePaths.gameSession.answers
+    );
+    const questionsResource = gameResource.addResource(
+      ResourcePaths.gameSession.questions
+    );
     // const endGameResource = gameResource.addResource(
     //   resourcePaths.gameSession.end
     // );
@@ -30,6 +35,24 @@ export class GameSessionRestApi extends Construct {
     new PlayGameLambda(this, "PlayGameHandler", {
       table: props.table,
       resource: gameResource,
+    });
+
+    new GetAnswerLambda(this, "GetAnswerHandler", {
+      table: props.table,
+      resource: answersResource,
+      webSocketApiId: "",
+      webSocketAccount: props.account,
+      webSocketRegion: props.region,
+      webSocketStage: "",
+    });
+
+    new GetNextQuestionLambda(this, "GetNextQuestionHandler", {
+      table: props.table,
+      resource: questionsResource,
+      webSocketApiId: "",
+      webSocketAccount: props.account,
+      webSocketRegion: props.region,
+      webSocketStage: "",
     });
   }
 }
