@@ -52,6 +52,7 @@ interface GameSessionFunctionNames {
 
 interface ResourcePaths {
   gameSession: GameSesssionResourcePaths;
+  player: PlayerResourcePaths;
 }
 
 interface GameSesssionResourcePaths {
@@ -59,6 +60,23 @@ interface GameSesssionResourcePaths {
   answers: string;
   questions: string;
   end: string;
+}
+
+interface PlayerResourcePaths {
+  choices: string;
+  game: string;
+  gameCode: string;
+  status: string;
+  players: string;
+}
+
+interface HeaderNames {
+  all: AllHeaderNames;
+}
+
+interface AllHeaderNames {
+  contentType: string;
+  apiSessionId: string;
 }
 
 export const EnvironmentVariables: EnvironmentVariables = {
@@ -90,6 +108,13 @@ export const ResourcePaths: ResourcePaths = {
     questions: "questions",
     end: "end",
   },
+  player: {
+    choices: "choices",
+    game: "games",
+    gameCode: "{code}",
+    status: "status",
+    players: "players",
+  },
 };
 
 export const HandlerFilePaths: HandlerFilePaths = {
@@ -111,5 +136,12 @@ export const HandlerFunctionNames: HandlerFunctionNames = {
     getAnswer: "handler",
     getNextQuestion: "handler",
     endGame: "handler",
+  },
+};
+
+export const HeaderNames: HeaderNames = {
+  all: {
+    contentType: "Content-Type",
+    apiSessionId: "API-SESSION-ID",
   },
 };

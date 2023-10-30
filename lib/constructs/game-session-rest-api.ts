@@ -12,8 +12,6 @@ import {
 } from "./handlers";
 
 export class GameSessionRestApi extends Construct {
-  public stageName: string;
-
   constructor(scope: Construct, id: string, props: GameSessionRestApiProps) {
     super(scope, id);
 
