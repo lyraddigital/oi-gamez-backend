@@ -1,4 +1,4 @@
-import { CORS_ALLOWED_ORIGINS } from "@oigamez/configuration/cors-allowed-origin";
+import { CORS_ALLOWED_ORIGINS } from "@oigamez/configuration";
 
 import { ValidationResult } from "../models";
 

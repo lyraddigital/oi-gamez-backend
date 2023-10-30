@@ -1,12 +1,12 @@
 import { QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
-import { DYNAMO_TABLE_NAME } from "@oigamez/configuration/dynamo-table-name";
+import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
 import {
   dbClient,
   dynamoFieldNames,
   dynamoFieldValues,
   IndexNames,
 } from "@oigamez/dynamodb";
-import { mapFromDynamoToGameSession } from "@oigamez/mappers/dynamo/game-session-mapper";
+import { mapFromDynamoToGameSession } from "@oigamez/mappers";
 import { GameSession } from "@oigamez/models";
 
 export const getGameSessionByCode = async (

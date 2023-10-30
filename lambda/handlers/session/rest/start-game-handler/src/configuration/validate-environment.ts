@@ -1,5 +1,7 @@
-import { verifyDynamoTableName } from "@oigamez/configuration/dynamo-table-name";
-import { verifyPlayerWebsocketEndpoint } from "@oigamez/configuration/player-websocket-endpoint";
+import {
+  verifyDynamoTableName,
+  verifyPlayerWebsocketEndpoint,
+} from "@oigamez/configuration";
 
 export const validateEnvironment = (): void => {
   verifyDynamoTableName();

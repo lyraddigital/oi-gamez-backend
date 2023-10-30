@@ -1,4 +1,4 @@
-import { GAME_CODE_LENGTH } from "@oigamez/configuration/game-code-length";
+import { GAME_CODE_LENGTH } from "@oigamez/configuration";
 
 import { ValidationResult } from "../models";
 

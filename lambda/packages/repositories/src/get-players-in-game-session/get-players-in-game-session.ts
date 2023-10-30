@@ -1,11 +1,11 @@
 import { QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
-import { DYNAMO_TABLE_NAME } from "@oigamez/configuration/dynamo-table-name";
+import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
 import {
   dbClient,
   dynamoFieldNames,
   dynamoFieldValues,
 } from "@oigamez/dynamodb";
-import { mapFromDynamoToPlayer } from "@oigamez/mappers/dynamo/player-mapper";
+import { mapFromDynamoToPlayer } from "@oigamez/mappers";
 import { GameSession, Player } from "@oigamez/models";
 
 export const getPlayersInGameSession = async (

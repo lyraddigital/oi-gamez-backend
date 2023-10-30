@@ -1,4 +1,4 @@
-import { verifyDynamoTableName } from "@oigamez/configuration/dynamo-table-name";
+import { verifyDynamoTableName } from "@oigamez/configuration";
 
 import { verifyUpdatedConnectWindowInSeconds } from "./updated-connect-window";
 

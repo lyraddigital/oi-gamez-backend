@@ -1,5 +1,5 @@
 import { APIGatewayProxyResult } from "aws-lambda";
-import { CORS_ALLOWED_ORIGINS } from "@oigamez/configuration/cors-allowed-origin";
+import { CORS_ALLOWED_ORIGINS } from "@oigamez/configuration";
 
 export const corsBadRequestResponse = (
   errorMessages: string[]

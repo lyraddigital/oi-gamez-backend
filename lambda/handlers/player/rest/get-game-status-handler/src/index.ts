@@ -1,8 +1,10 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { corsBadRequestResponse } from "@oigamez/responses/cors-bad-request";
-import { corsOkResponseWithData } from "@oigamez/responses/cors-ok-response-with-data";
-import { fatalErrorResponse } from "@oigamez/responses/fatal-error-response";
-import { convertFromMillisecondsToSeconds } from "@oigamez/services/milliseconds-to-seconds";
+import {
+  corsBadRequestResponse,
+  corsOkResponseWithData,
+  fatalErrorResponse,
+} from "@oigamez/responses";
+import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 
 import { validateEnvironment } from "./configuration";
 import { getGameStatus } from "./services";

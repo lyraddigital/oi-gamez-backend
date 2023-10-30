@@ -2,7 +2,7 @@ import {
   UpdateItemCommand,
   UpdateItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
-import { DYNAMO_TABLE_NAME } from "@oigamez/configuration/dynamo-table-name";
+import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
 import {
   dbClient,
   expressions,
