@@ -1,6 +1,6 @@
 import { Runtime } from "aws-cdk-lib/aws-lambda";
 import { LambdaIntegration } from "aws-cdk-lib/aws-apigateway";
-import { NodejsFunction } from "aws-cdk-lib/aws-lambda-nodejs";
+import { NodejsFunction, OutputFormat } from "aws-cdk-lib/aws-lambda-nodejs";
 import { Construct } from "constructs";
 import { join } from "path";
 
@@ -21,6 +21,9 @@ export class RestAPIHandlerFunction extends Construct {
       handler: `${props.handlerFunctionName}`,
       entry: join(__dirname, props.handlerFileLocation),
       environment: props.environment,
+      bundling: {
+        format: OutputFormat.ESM,
+      },
     });
 
     props.resource.addMethod(
