@@ -1,20 +1,16 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { CONNECT_WINDOW_IN_SECONDS } from "@oigamez/configuration";
+import { CONNECT_WINDOW_IN_SECONDS } from "@oigamez/configuration/connect-window-in-seconds";
 import { Player } from "@oigamez/models";
 import {
   getGameSessionByCode,
   getPlayersInGameSession,
 } from "@oigamez/repositories";
-import {
-  corsBadRequestResponse,
-  corsOkResponseWithData,
-  fatalErrorResponse,
-} from "@oigamez/responses";
-import {
-  convertFromMillisecondsToSeconds,
-  incrementAndReturnInSeconds,
-  createUniqueSessionId,
-} from "@oigamez/services";
+import { corsBadRequestResponse } from "@oigamez/responses/cors-bad-request";
+import { corsOkResponseWithData } from "@oigamez/responses/cors-ok-response-with-data";
+import { fatalErrorResponse } from "@oigamez/responses/fatal-error-response";
+import { convertFromMillisecondsToSeconds } from "@oigamez/services/milliseconds-to-seconds";
+import { incrementAndReturnInSeconds } from "@oigamez/services/increment-and-convert-to-seconds";
+import { createUniqueSessionId } from "@oigamez/services/session-id-generator";
 
 import { validateEnvironment } from "./configuration";
 import { JoinGamePayload } from "./models";

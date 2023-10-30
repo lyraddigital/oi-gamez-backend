@@ -1,12 +1,12 @@
 import { QueryCommand, QueryCommandInput } from "@aws-sdk/client-dynamodb";
-import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
+import { DYNAMO_TABLE_NAME } from "@oigamez/configuration/dynamo-table-name";
 import {
   dbClient,
   dynamoFieldNames,
   dynamoFieldValues,
   IndexNames,
 } from "@oigamez/dynamodb";
-import { mapFromDynamoToPlayer } from "@oigamez/mappers";
+import { mapFromDynamoToPlayer } from "@oigamez/mappers/dynamo/player-mapper";
 import { Player } from "@oigamez/models";
 
 export const getPlayerBySessionId = async (

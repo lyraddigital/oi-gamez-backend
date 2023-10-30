@@ -1,15 +1,11 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import {
-  convertFromMillisecondsToSeconds,
-  incrementAndReturnInSeconds,
-} from "@oigamez/services";
+import { incrementAndReturnInSeconds } from "@oigamez/services/increment-and-convert-to-seconds";
+import { convertFromMillisecondsToSeconds } from "@oigamez/services/milliseconds-to-seconds";
 import { GameSessionStatuses } from "@oigamez/dynamodb";
 import { getGameSession } from "@oigamez/repositories";
-import {
-  badRequestResponse,
-  fatalErrorResponse,
-  okResponse,
-} from "@oigamez/responses";
+import { badRequestResponse } from "@oigamez/responses/bad-request";
+import { okResponse } from "@oigamez/responses/ok-response";
+import { fatalErrorResponse } from "@oigamez/responses/fatal-error-response";
 import { validateSessionId } from "@oigamez/validators";
 
 import {

@@ -1,5 +1,5 @@
 import { GetItemCommand, GetItemCommandInput } from "@aws-sdk/client-dynamodb";
-import { DYNAMO_TABLE_NAME } from "@oigamez/configuration";
+import { DYNAMO_TABLE_NAME } from "@oigamez/configuration/dynamo-table-name";
 import { dbClient, keys } from "@oigamez/dynamodb";
 
 import { mapFromDynamoToQuestionGroupCount } from "../../mappers";

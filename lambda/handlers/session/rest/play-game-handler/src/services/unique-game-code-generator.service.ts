@@ -1,4 +1,4 @@
-import { GAME_CODE_LENGTH } from "@oigamez/configuration";
+import { GAME_CODE_LENGTH } from "@oigamez/configuration/game-code-length";
 
 const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const charactersLength = characters.length;

@@ -1,5 +1,5 @@
 import { AttributeValue } from "@aws-sdk/client-dynamodb";
-import { mapQuestions } from "@oigamez/mappers";
+import { mapQuestions } from "@oigamez/mappers/dynamo/questions-mapper";
 import { Question } from "@oigamez/models";
 
 export const getFirstQuestionAndCountFromDynamo = (

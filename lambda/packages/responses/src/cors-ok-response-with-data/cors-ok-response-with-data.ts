@@ -1,5 +1,5 @@
 import { APIGatewayProxyResult } from "aws-lambda";
-import { CORS_ALLOWED_ORIGINS } from "@oigamez/configuration";
+import { CORS_ALLOWED_ORIGINS } from "@oigamez/configuration/cors-allowed-origin";
 
 export const corsOkResponseWithData = <T>(data: T): APIGatewayProxyResult => {
   return {

@@ -1,13 +1,11 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { GAME_SESSION_WEBSOCKET_ENDPOINT } from "@oigamez/configuration";
+import { GAME_SESSION_WEBSOCKET_ENDPOINT } from "@oigamez/configuration/game-session-websocket-endpoint";
 import { sendCommunicationEvent } from "@oigamez/communication";
-import {
-  badRequestResponse,
-  fatalErrorResponse,
-  okResponse,
-} from "@oigamez/responses";
+import { badRequestResponse } from "@oigamez/responses/bad-request";
+import { okResponse } from "@oigamez/responses/ok-response";
+import { fatalErrorResponse } from "@oigamez/responses/fatal-error-response";
 import { getGameSession, getPlayerBySessionId } from "@oigamez/repositories";
-import { convertFromMillisecondsToSeconds } from "@oigamez/services";
+import { convertFromMillisecondsToSeconds } from "@oigamez/services/milliseconds-to-seconds";
 import { validateSessionId } from "@oigamez/validators";
 
 import { validateEnvironment } from "./configuration";

@@ -29,14 +29,14 @@
       "@oigamez/communication": [
         "./lambda/packages/communication/src"
       ],
-      "@oigamez/configuration": [
-        "./lambda/packages/configuration/src"
+      "@oigamez/configuration/*": [
+        "./lambda/packages/configuration/src/*"
       ],
       "@oigamez/dynamodb": [
         "./lambda/packages/dynamodb/src"
       ],
-      "@oigamez/mappers": [
-        "./lambda/packages/mappers/src"
+      "@oigamez/mappers/*": [
+        "./lambda/packages/mappers/src/*"
       ],
       "@oigamez/models": [
         "./lambda/packages/models/src"
@@ -44,14 +44,17 @@
       "@oigamez/repositories": [
         "./lambda/packages/repositories/src"
       ],
-      "@oigamez/responses": [
-        "./lambda/packages/responses/src"
+      "@oigamez/responses/*": [
+        "./lambda/packages/responses/src/*"
       ],
       "@oigamez/rule-sets": [
         "./lambda/packages/rule-sets/src"
       ],
       "@oigamez/services": [
         "./lambda/packages/services/src"
+      ],
+      "@oigamez/services/*": [
+        "./lambda/packages/services/src/*"
       ],
       "@oigamez/validators": [
         "./lambda/packages/validators/src"

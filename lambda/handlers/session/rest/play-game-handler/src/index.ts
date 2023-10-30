@@ -1,10 +1,9 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { CONNECT_WINDOW_IN_SECONDS } from "@oigamez/configuration";
-import { okResponseWithData, fatalErrorResponse } from "@oigamez/responses";
-import {
-  createUniqueSessionId,
-  incrementAndReturnInSeconds,
-} from "@oigamez/services";
+import { CONNECT_WINDOW_IN_SECONDS } from "@oigamez/configuration/connect-window-in-seconds";
+import { okResponseWithData } from "@oigamez/responses/ok-response-with-data";
+import { fatalErrorResponse } from "@oigamez/responses/fatal-error-response";
+import { incrementAndReturnInSeconds } from "@oigamez/services/increment-and-convert-to-seconds";
+import { createUniqueSessionId } from "@oigamez/services/session-id-generator";
 
 import { GameSessionToCreate } from "./models";
 import { createUniqueGameCode } from "./services";
