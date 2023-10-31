@@ -5,6 +5,7 @@ import { HeaderNames, ResourcePaths } from "../constants";
 import { GameSessionRestApiProps } from "../props";
 
 import { CorsResource } from "./api-resources";
+import { GetGameSessionStatusLambda, JoinGameLambda } from "./handlers";
 
 export class PlayersRestApi extends Construct {
   constructor(scope: Construct, id: string, props: GameSessionRestApiProps) {
@@ -35,6 +36,18 @@ export class PlayersRestApi extends Construct {
       resourceName: ResourcePaths.player.choices,
       allowedOrigins: allowedOrigins,
       allowedHeaders: HeaderNames.all.apiSessionId,
+    });
+
+    new JoinGameLambda(this, "JoinGameHandler", {
+      table: props.table,
+      resource: playersCorsResource.resource,
+      allowedOrigins,
+    });
+
+    new GetGameSessionStatusLambda(this, "GetGameSessionStatusHandler", {
+      table: props.table,
+      resource: statusResource,
+      allowedOrigins,
     });
   }
 }

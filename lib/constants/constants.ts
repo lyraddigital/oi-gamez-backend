@@ -3,6 +3,8 @@ interface EnvironmentVariables {
   getAnswer: GetAnswerEnvironmentVariables;
   getNextQuestion: GetNextQuestionEnvironmentVariables;
   endGame: EndGameEnvironmentVariables;
+  joinGame: JoinGameEnvironmentVariables;
+  getGameStatus: GetGameStatusEnvironmentVariables;
 }
 
 interface PlayGameEnvironmentVariables {
@@ -28,8 +30,22 @@ interface EndGameEnvironmentVariables {
   playerWebsocketEndpoint: string;
 }
 
+interface JoinGameEnvironmentVariables {
+  tableName: string;
+  gameCodeLength: string;
+  connectWindowInSeconds: string;
+  corsAllowedOrigins: string;
+}
+
+interface GetGameStatusEnvironmentVariables {
+  tableName: string;
+  gameCodeLength: string;
+  corsAllowedOrigins: string;
+}
+
 interface HandlerFilePaths {
   gameSession: GameSessionHandlerFilePaths;
+  player: PlayerHandlerFilePaths;
 }
 
 interface GameSessionHandlerFilePaths {
@@ -39,8 +55,14 @@ interface GameSessionHandlerFilePaths {
   endGame: string;
 }
 
+interface PlayerHandlerFilePaths {
+  joinGame: string;
+  getGameStatus: string;
+}
+
 interface HandlerFunctionNames {
   gameSession: GameSessionFunctionNames;
+  player: PlayerFunctionNames;
 }
 
 interface GameSessionFunctionNames {
@@ -48,6 +70,11 @@ interface GameSessionFunctionNames {
   getAnswer: string;
   getNextQuestion: string;
   endGame: string;
+}
+
+interface PlayerFunctionNames {
+  joinGame: string;
+  getGameStatus: string;
 }
 
 interface ResourcePaths {
@@ -79,6 +106,10 @@ interface AllHeaderNames {
   apiSessionId: string;
 }
 
+interface IndexNames {
+  gameCodeIndex: string;
+}
+
 export const EnvironmentVariables: EnvironmentVariables = {
   playGame: {
     tableName: "DYNAMO_TABLE_NAME",
@@ -98,6 +129,17 @@ export const EnvironmentVariables: EnvironmentVariables = {
   getNextQuestion: {
     tableName: "DYNAMO_TABLE_NAME",
     playerWebsocketEndpoint: "PLAYER_WEBSOCKET_ENDPOINT",
+  },
+  joinGame: {
+    tableName: "DYNAMO_TABLE_NAME",
+    gameCodeLength: "GAME_CODE_LENGTH",
+    connectWindowInSeconds: "CONNECT_WINDOW_IN_SECONDS",
+    corsAllowedOrigins: "CORS_ALLOWED_ORIGINS",
+  },
+  getGameStatus: {
+    tableName: "DYNAMO_TABLE_NAME",
+    gameCodeLength: "GAME_CODE_LENGTH",
+    corsAllowedOrigins: "CORS_ALLOWED_ORIGINS",
   },
 };
 
@@ -128,6 +170,12 @@ export const HandlerFilePaths: HandlerFilePaths = {
     endGame:
       "../../../lambda/handlers/session/rest/end-game-handler/src/index.ts",
   },
+  player: {
+    joinGame:
+      "../../../lambda/handlers/player/rest/join-game-handler/src/index.ts",
+    getGameStatus:
+      "../../../lambda/handlers/player/rest/get-game-status-handler/src/index.ts",
+  },
 };
 
 export const HandlerFunctionNames: HandlerFunctionNames = {
@@ -137,6 +185,10 @@ export const HandlerFunctionNames: HandlerFunctionNames = {
     getNextQuestion: "handler",
     endGame: "handler",
   },
+  player: {
+    joinGame: "handler",
+    getGameStatus: "handler",
+  },
 };
 
 export const HeaderNames: HeaderNames = {
@@ -144,4 +196,8 @@ export const HeaderNames: HeaderNames = {
     contentType: "Content-Type",
     apiSessionId: "API-SESSION-ID",
   },
+};
+
+export const IndexNames: IndexNames = {
+  gameCodeIndex: "GameCode-index",
 };
