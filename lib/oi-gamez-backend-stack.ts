@@ -2,6 +2,7 @@ import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 
 import {
+  GameSessionExpiryLambda,
   GameSessionRestApi,
   GameSessionSocketApi,
   GameTable,
@@ -27,6 +28,9 @@ export class OiGamezBackendStack extends cdk.Stack {
       gameSessionWebSocketStageName: gameSessionSocketApi.stageName,
       account: this.account,
       region: this.region,
+    });
+    new GameSessionExpiryLambda(this, "GameSessionExpiryLambda", {
+      table: gameTable.table,
     });
 
     new GameSessionRestApi(this, "GameSessionHttpApi", {

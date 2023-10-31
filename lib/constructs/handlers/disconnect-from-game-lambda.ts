@@ -23,16 +23,17 @@ export class DisconnectFromGameLambda extends Construct {
 
     const gameSessionWebsocketEndpoint = `https://${props.webSocketApiId}.execute-api.${props.webSocketRegion}.amazonaws.com/${props.webSocketStage}`;
     const gameSessionWebsocketApiPostArn = `arn:aws:execute-api:${props.webSocketRegion}:${props.webSocketAccount}:${props.webSocketApiId}/${props.webSocketStage}/POST/@connections/*`;
-    const connectToHandlerFunction = new WebsocketAPIHandlerFunction(
+    const disconnectFromHandlerFunction = new WebsocketAPIHandlerFunction(
       this,
-      "ConnectToHandlerFunction",
+      "DisconnectFromHandlerFunction",
       {
-        handlerFileLocation: HandlerFilePaths.player.connectToGame,
-        handlerFunctionName: HandlerFunctionNames.player.connectToGame,
+        handlerFileLocation: HandlerFilePaths.player.disconnectFromGame,
+        handlerFunctionName: HandlerFunctionNames.player.disconnectFromGame,
         environment: {
-          [EnvironmentVariables.connectToGame.tableName]: props.table.tableName,
-          [EnvironmentVariables.connectToGame.gameSessionWebsocketEndpoint]:
-            gameSessionWebsocketEndpoint,
+          [EnvironmentVariables.disconnectFromGame.tableName]:
+            props.table.tableName,
+          [EnvironmentVariables.disconnectFromGame
+            .gameSessionWebsocketEndpoint]: gameSessionWebsocketEndpoint,
         },
       }
     );
@@ -57,18 +58,18 @@ export class DisconnectFromGameLambda extends Construct {
       actions: ["execute-api:ManageConnections"],
     });
 
-    connectToHandlerFunction.lambdaFunction.addToRolePolicy(
+    disconnectFromHandlerFunction.lambdaFunction.addToRolePolicy(
       dbTablePolicyDocument
     );
 
-    connectToHandlerFunction.lambdaFunction.addToRolePolicy(
+    disconnectFromHandlerFunction.lambdaFunction.addToRolePolicy(
       dbIndexPolicyDocument
     );
 
-    connectToHandlerFunction.lambdaFunction.addToRolePolicy(
+    disconnectFromHandlerFunction.lambdaFunction.addToRolePolicy(
       apiExecPolicyDocument
     );
 
-    this.lambdaFunction = connectToHandlerFunction.lambdaFunction;
+    this.lambdaFunction = disconnectFromHandlerFunction.lambdaFunction;
   }
 }

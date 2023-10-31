@@ -9,6 +9,8 @@ interface EnvironmentVariables {
   chooseOption: ChooseOptionEnvironmentVariables;
   connectGame: ConnectGameEnvironmentVariables;
   connectToGame: ConnectToGameEnvironmentVariables;
+  disconnectFromGame: DisconnectFromGameEnvironmentVariables;
+  gameSessionExpiryJob: GameSessionExpiryJobEnvironmentVariables;
 }
 
 interface PlayGameEnvironmentVariables {
@@ -67,6 +69,15 @@ interface ConnectToGameEnvironmentVariables {
   gameSessionWebsocketEndpoint: string;
 }
 
+interface DisconnectFromGameEnvironmentVariables {
+  tableName: string;
+  gameSessionWebsocketEndpoint: string;
+}
+
+interface GameSessionExpiryJobEnvironmentVariables {
+  tableName: string;
+}
+
 interface HandlerFilePaths {
   gameSession: GameSessionHandlerFilePaths;
   player: PlayerHandlerFilePaths;
@@ -79,6 +90,7 @@ interface GameSessionHandlerFilePaths {
   getNextQuestion: string;
   endGame: string;
   connectGame: string;
+  expiryJob: string;
 }
 
 interface PlayerHandlerFilePaths {
@@ -86,6 +98,7 @@ interface PlayerHandlerFilePaths {
   getGameStatus: string;
   chooseOption: string;
   connectToGame: string;
+  disconnectFromGame: string;
 }
 
 interface HandlerFunctionNames {
@@ -100,6 +113,7 @@ interface GameSessionFunctionNames {
   getNextQuestion: string;
   endGame: string;
   connectGame: string;
+  expiryJob: string;
 }
 
 interface PlayerFunctionNames {
@@ -107,6 +121,7 @@ interface PlayerFunctionNames {
   getGameStatus: string;
   chooseOption: string;
   connectToGame: string;
+  disconnectFromGame: string;
 }
 
 interface ResourcePaths {
@@ -191,6 +206,13 @@ export const EnvironmentVariables: EnvironmentVariables = {
     tableName: "DYNAMO_TABLE_NAME",
     gameSessionWebsocketEndpoint: "GAME_SESSION_WEBSOCKET_ENDPOINT",
   },
+  disconnectFromGame: {
+    tableName: "DYNAMO_TABLE_NAME",
+    gameSessionWebsocketEndpoint: "GAME_SESSION_WEBSOCKET_ENDPOINT",
+  },
+  gameSessionExpiryJob: {
+    tableName: "DYNAMO_TABLE_NAME",
+  },
 };
 
 export const ResourcePaths: ResourcePaths = {
@@ -223,6 +245,7 @@ export const HandlerFilePaths: HandlerFilePaths = {
       "../../../lambda/handlers/session/rest/end-game-handler/src/index.ts",
     connectGame:
       "../../../lambda/handlers/session/websocket/connect-game-session-handler/src/index.ts",
+    expiryJob: "../../lambda/dynamo-db/game-session-expiry-job/src/index.ts",
   },
   player: {
     joinGame:
@@ -233,6 +256,8 @@ export const HandlerFilePaths: HandlerFilePaths = {
       "../../../lambda/handlers/player/rest/choose-option-handler/src/index.ts",
     connectToGame:
       "../../../lambda/handlers/player/websocket/connect-to-game-session-handler/src/index.ts",
+    disconnectFromGame:
+      "../../../lambda/handlers/player/websocket/disconnect-from-game-session-handler/src/index.ts",
   },
 };
 
@@ -244,12 +269,14 @@ export const HandlerFunctionNames: HandlerFunctionNames = {
     getNextQuestion: "handler",
     endGame: "handler",
     connectGame: "handler",
+    expiryJob: "handler",
   },
   player: {
     joinGame: "handler",
     getGameStatus: "handler",
     chooseOption: "handler",
     connectToGame: "handler",
+    disconnectFromGame: "handler",
   },
 };
 
