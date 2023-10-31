@@ -5,7 +5,11 @@ import { HeaderNames, ResourcePaths } from "../constants";
 import { GameSessionRestApiProps } from "../props";
 
 import { CorsResource } from "./api-resources";
-import { GetGameSessionStatusLambda, JoinGameLambda } from "./handlers";
+import {
+  ChooseOptionLambda,
+  GetGameSessionStatusLambda,
+  JoinGameLambda,
+} from "./handlers";
 
 export class PlayersRestApi extends Construct {
   constructor(scope: Construct, id: string, props: GameSessionRestApiProps) {
@@ -47,6 +51,12 @@ export class PlayersRestApi extends Construct {
     new GetGameSessionStatusLambda(this, "GetGameSessionStatusHandler", {
       table: props.table,
       resource: statusResource,
+      allowedOrigins,
+    });
+
+    new ChooseOptionLambda(this, "ChooseOptionHandler", {
+      table: props.table,
+      resource: choicesResource.resource,
       allowedOrigins,
     });
   }

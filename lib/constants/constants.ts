@@ -1,10 +1,12 @@
 interface EnvironmentVariables {
   playGame: PlayGameEnvironmentVariables;
+  startGame: StartGameEnvironmentVariables;
   getAnswer: GetAnswerEnvironmentVariables;
   getNextQuestion: GetNextQuestionEnvironmentVariables;
   endGame: EndGameEnvironmentVariables;
   joinGame: JoinGameEnvironmentVariables;
   getGameStatus: GetGameStatusEnvironmentVariables;
+  chooseOption: ChooseOptionEnvironmentVariables;
 }
 
 interface PlayGameEnvironmentVariables {
@@ -13,6 +15,11 @@ interface PlayGameEnvironmentVariables {
   connectWindowInSeconds: string;
   gameSessionMinPlayers: string;
   gameSessionMaxPlayers: string;
+}
+
+interface StartGameEnvironmentVariables {
+  tableName: string;
+  playerWebsocketEndpoint: string;
 }
 
 interface GetAnswerEnvironmentVariables {
@@ -43,6 +50,11 @@ interface GetGameStatusEnvironmentVariables {
   corsAllowedOrigins: string;
 }
 
+interface ChooseOptionEnvironmentVariables {
+  tableName: string;
+  corsAllowedOrigins: string;
+}
+
 interface HandlerFilePaths {
   gameSession: GameSessionHandlerFilePaths;
   player: PlayerHandlerFilePaths;
@@ -50,6 +62,7 @@ interface HandlerFilePaths {
 
 interface GameSessionHandlerFilePaths {
   playGame: string;
+  startGame: string;
   getAnswer: string;
   getNextQuestion: string;
   endGame: string;
@@ -58,6 +71,7 @@ interface GameSessionHandlerFilePaths {
 interface PlayerHandlerFilePaths {
   joinGame: string;
   getGameStatus: string;
+  chooseOption: string;
 }
 
 interface HandlerFunctionNames {
@@ -67,6 +81,7 @@ interface HandlerFunctionNames {
 
 interface GameSessionFunctionNames {
   playGame: string;
+  startGame: string;
   getAnswer: string;
   getNextQuestion: string;
   endGame: string;
@@ -75,6 +90,7 @@ interface GameSessionFunctionNames {
 interface PlayerFunctionNames {
   joinGame: string;
   getGameStatus: string;
+  chooseOption: string;
 }
 
 interface ResourcePaths {
@@ -108,6 +124,7 @@ interface AllHeaderNames {
 
 interface IndexNames {
   gameCodeIndex: string;
+  playerSessionIndexName: string;
 }
 
 export const EnvironmentVariables: EnvironmentVariables = {
@@ -117,6 +134,10 @@ export const EnvironmentVariables: EnvironmentVariables = {
     connectWindowInSeconds: "CONNECT_WINDOW_IN_SECONDS",
     gameSessionMinPlayers: "GAME_SESSION_MIN_PLAYERS",
     gameSessionMaxPlayers: "GAME_SESSION_MAX_PLAYERS",
+  },
+  startGame: {
+    tableName: "DYNAMO_TABLE_NAME",
+    playerWebsocketEndpoint: "PLAYER_WEBSOCKET_ENDPOINT",
   },
   endGame: {
     tableName: "DYNAMO_TABLE_NAME",
@@ -141,6 +162,10 @@ export const EnvironmentVariables: EnvironmentVariables = {
     gameCodeLength: "GAME_CODE_LENGTH",
     corsAllowedOrigins: "CORS_ALLOWED_ORIGINS",
   },
+  chooseOption: {
+    tableName: "DYNAMO_TABLE_NAME",
+    corsAllowedOrigins: "CORS_ALLOWED_ORIGINS",
+  },
 };
 
 export const ResourcePaths: ResourcePaths = {
@@ -163,6 +188,8 @@ export const HandlerFilePaths: HandlerFilePaths = {
   gameSession: {
     playGame:
       "../../../lambda/handlers/session/rest/play-game-handler/src/index.ts",
+    startGame:
+      "../../../lambda/handlers/session/rest/start-game-handler/src/index.ts",
     getAnswer:
       "../../../lambda/handlers/session/rest/get-answer-handler/src/index.ts",
     getNextQuestion:
@@ -175,12 +202,15 @@ export const HandlerFilePaths: HandlerFilePaths = {
       "../../../lambda/handlers/player/rest/join-game-handler/src/index.ts",
     getGameStatus:
       "../../../lambda/handlers/player/rest/get-game-status-handler/src/index.ts",
+    chooseOption:
+      "../../../lambda/handlers/player/rest/choose-option-handler/src/index.ts",
   },
 };
 
 export const HandlerFunctionNames: HandlerFunctionNames = {
   gameSession: {
     playGame: "handler",
+    startGame: "handler",
     getAnswer: "handler",
     getNextQuestion: "handler",
     endGame: "handler",
@@ -188,6 +218,7 @@ export const HandlerFunctionNames: HandlerFunctionNames = {
   player: {
     joinGame: "handler",
     getGameStatus: "handler",
+    chooseOption: "handler",
   },
 };
 
@@ -200,4 +231,5 @@ export const HeaderNames: HeaderNames = {
 
 export const IndexNames: IndexNames = {
   gameCodeIndex: "GameCode-index",
+  playerSessionIndexName: "PlayerSession-index",
 };

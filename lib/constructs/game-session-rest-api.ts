@@ -9,6 +9,7 @@ import {
   GetAnswerLambda,
   GetNextQuestionLambda,
   PlayGameLambda,
+  StartGameLambda,
 } from "./handlers";
 
 export class GameSessionRestApi extends Construct {
@@ -34,6 +35,15 @@ export class GameSessionRestApi extends Construct {
     new PlayGameLambda(this, "PlayGameHandler", {
       table: props.table,
       resource: gameResource,
+    });
+
+    new StartGameLambda(this, "StartGameHandler", {
+      table: props.table,
+      resource: gameResource,
+      webSocketApiId: "",
+      webSocketAccount: props.account,
+      webSocketRegion: props.region,
+      webSocketStage: "",
     });
 
     new GetAnswerLambda(this, "GetAnswerHandler", {
