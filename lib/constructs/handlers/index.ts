@@ -1,4 +1,7 @@
 export * from "./choose-option-lambda";
+export * from "./connect-game-lambda";
+export * from "./connect-to-game-lambda";
+export * from "./disconnect-from-game-lambda";
 export * from "./end-game-lambda";
 export * from "./get-answer-lambda";
 export * from "./get-game-session-status-lambda";

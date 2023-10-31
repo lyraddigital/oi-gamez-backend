@@ -2,7 +2,7 @@ import { Construct } from "constructs";
 import { RestApi } from "aws-cdk-lib/aws-apigateway";
 
 import { HeaderNames, ResourcePaths } from "../constants";
-import { GameSessionRestApiProps } from "../props";
+import { PlayersRestApiProps } from "../props";
 
 import { CorsResource } from "./api-resources";
 import {
@@ -12,7 +12,7 @@ import {
 } from "./handlers";
 
 export class PlayersRestApi extends Construct {
-  constructor(scope: Construct, id: string, props: GameSessionRestApiProps) {
+  constructor(scope: Construct, id: string, props: PlayersRestApiProps) {
     super(scope, id);
 
     const allowedOrigins = "https://oigamez.com";

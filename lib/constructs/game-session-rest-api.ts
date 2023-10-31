@@ -40,37 +40,37 @@ export class GameSessionRestApi extends Construct {
     new StartGameLambda(this, "StartGameHandler", {
       table: props.table,
       resource: gameResource,
-      webSocketApiId: "",
+      webSocketApiId: props.playerSocketApi.apiId,
       webSocketAccount: props.account,
       webSocketRegion: props.region,
-      webSocketStage: "",
+      webSocketStage: props.playerWebSocketStageName,
     });
 
     new GetAnswerLambda(this, "GetAnswerHandler", {
       table: props.table,
       resource: answersResource,
-      webSocketApiId: "",
+      webSocketApiId: props.playerSocketApi.apiId,
       webSocketAccount: props.account,
       webSocketRegion: props.region,
-      webSocketStage: "",
+      webSocketStage: props.playerWebSocketStageName,
     });
 
     new GetNextQuestionLambda(this, "GetNextQuestionHandler", {
       table: props.table,
       resource: questionsResource,
-      webSocketApiId: "",
+      webSocketApiId: props.playerSocketApi.apiId,
       webSocketAccount: props.account,
       webSocketRegion: props.region,
-      webSocketStage: "",
+      webSocketStage: props.playerWebSocketStageName,
     });
 
     new EndGameLambda(this, "EndGameHandler", {
       table: props.table,
       resource: endGameResource,
-      webSocketApiId: "",
+      webSocketApiId: props.playerSocketApi.apiId,
       webSocketAccount: props.account,
       webSocketRegion: props.region,
-      webSocketStage: "",
+      webSocketStage: props.playerWebSocketStageName,
     });
   }
 }

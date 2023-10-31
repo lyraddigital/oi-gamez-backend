@@ -7,6 +7,8 @@ interface EnvironmentVariables {
   joinGame: JoinGameEnvironmentVariables;
   getGameStatus: GetGameStatusEnvironmentVariables;
   chooseOption: ChooseOptionEnvironmentVariables;
+  connectGame: ConnectGameEnvironmentVariables;
+  connectToGame: ConnectToGameEnvironmentVariables;
 }
 
 interface PlayGameEnvironmentVariables {
@@ -55,6 +57,16 @@ interface ChooseOptionEnvironmentVariables {
   corsAllowedOrigins: string;
 }
 
+interface ConnectGameEnvironmentVariables {
+  tableName: string;
+  updatedConnectWindowInSeconds: string;
+}
+
+interface ConnectToGameEnvironmentVariables {
+  tableName: string;
+  gameSessionWebsocketEndpoint: string;
+}
+
 interface HandlerFilePaths {
   gameSession: GameSessionHandlerFilePaths;
   player: PlayerHandlerFilePaths;
@@ -66,12 +78,14 @@ interface GameSessionHandlerFilePaths {
   getAnswer: string;
   getNextQuestion: string;
   endGame: string;
+  connectGame: string;
 }
 
 interface PlayerHandlerFilePaths {
   joinGame: string;
   getGameStatus: string;
   chooseOption: string;
+  connectToGame: string;
 }
 
 interface HandlerFunctionNames {
@@ -85,12 +99,14 @@ interface GameSessionFunctionNames {
   getAnswer: string;
   getNextQuestion: string;
   endGame: string;
+  connectGame: string;
 }
 
 interface PlayerFunctionNames {
   joinGame: string;
   getGameStatus: string;
   chooseOption: string;
+  connectToGame: string;
 }
 
 interface ResourcePaths {
@@ -125,6 +141,7 @@ interface AllHeaderNames {
 interface IndexNames {
   gameCodeIndex: string;
   playerSessionIndexName: string;
+  playerConnectionIndexName: string;
 }
 
 export const EnvironmentVariables: EnvironmentVariables = {
@@ -166,6 +183,14 @@ export const EnvironmentVariables: EnvironmentVariables = {
     tableName: "DYNAMO_TABLE_NAME",
     corsAllowedOrigins: "CORS_ALLOWED_ORIGINS",
   },
+  connectGame: {
+    tableName: "DYNAMO_TABLE_NAME",
+    updatedConnectWindowInSeconds: "UPDATED_CONNECT_WINDOW_IN_SECONDS",
+  },
+  connectToGame: {
+    tableName: "DYNAMO_TABLE_NAME",
+    gameSessionWebsocketEndpoint: "GAME_SESSION_WEBSOCKET_ENDPOINT",
+  },
 };
 
 export const ResourcePaths: ResourcePaths = {
@@ -196,6 +221,8 @@ export const HandlerFilePaths: HandlerFilePaths = {
       "../../../lambda/handlers/session/rest/get-next-question-handler/src/index.ts",
     endGame:
       "../../../lambda/handlers/session/rest/end-game-handler/src/index.ts",
+    connectGame:
+      "../../../lambda/handlers/session/websocket/connect-game-session-handler/src/index.ts",
   },
   player: {
     joinGame:
@@ -204,6 +231,8 @@ export const HandlerFilePaths: HandlerFilePaths = {
       "../../../lambda/handlers/player/rest/get-game-status-handler/src/index.ts",
     chooseOption:
       "../../../lambda/handlers/player/rest/choose-option-handler/src/index.ts",
+    connectToGame:
+      "../../../lambda/handlers/player/websocket/connect-to-game-session-handler/src/index.ts",
   },
 };
 
@@ -214,11 +243,13 @@ export const HandlerFunctionNames: HandlerFunctionNames = {
     getAnswer: "handler",
     getNextQuestion: "handler",
     endGame: "handler",
+    connectGame: "handler",
   },
   player: {
     joinGame: "handler",
     getGameStatus: "handler",
     chooseOption: "handler",
+    connectToGame: "handler",
   },
 };
 
@@ -232,4 +263,5 @@ export const HeaderNames: HeaderNames = {
 export const IndexNames: IndexNames = {
   gameCodeIndex: "GameCode-index",
   playerSessionIndexName: "PlayerSession-index",
+  playerConnectionIndexName: "PlayerConnection-index",
 };
