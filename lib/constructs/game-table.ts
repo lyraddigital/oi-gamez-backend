@@ -2,6 +2,7 @@ import { Construct } from "constructs";
 import {
   AttributeType,
   ProjectionType,
+  StreamViewType,
   TableV2,
 } from "aws-cdk-lib/aws-dynamodb";
 
@@ -14,6 +15,7 @@ export class GameTable extends Construct {
     this.table = new TableV2(this, "OIGamezData", {
       partitionKey: { name: "PK", type: AttributeType.STRING },
       sortKey: { name: "SK", type: AttributeType.STRING },
+      dynamoStream: StreamViewType.OLD_IMAGE,
       timeToLiveAttribute: "TTL",
     });
 
