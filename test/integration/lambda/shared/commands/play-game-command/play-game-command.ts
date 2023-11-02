@@ -1,10 +1,11 @@
 import { RestCommand } from "../rest-command";
 
+import { GAME_SESSION_REST_API_BASE_URL } from "../../environment";
 import { PlayGameCommandResponse } from "./play-game-command-response";
 
 export class PlayGameCommand extends RestCommand {
   constructor() {
-    super("https://cwrj9c1y1i.execute-api.ap-southeast-2.amazonaws.com/prod");
+    super(GAME_SESSION_REST_API_BASE_URL);
   }
 
   public async execute(): Promise<PlayGameCommandResponse> {

@@ -3,18 +3,17 @@ import {
   GetItemCommand,
   GetItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
+
 import { dbClient } from "../client";
+import { DYNAMO_DB_TABLE } from "../../environment";
 
 export class DynamoDbQuery {
-  private tableName: string =
-    "OiGamezBackendStack-GameTableOIGamezData59BA9E79-1P0RG3ZPC2J6M";
-
   protected async executeGet(
     pk: AttributeValue,
     sk: AttributeValue
   ): Promise<Record<string, AttributeValue> | undefined> {
     const getItemCommandInput: GetItemCommandInput = {
-      TableName: this.tableName,
+      TableName: DYNAMO_DB_TABLE,
       Key: {
         PK: pk,
         SK: sk,
