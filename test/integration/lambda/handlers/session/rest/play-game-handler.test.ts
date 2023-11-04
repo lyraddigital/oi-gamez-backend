@@ -12,8 +12,8 @@ describe("Play Game Handler", () => {
 
     // Assert
     expect(response).toBeDefined();
-    expect(response.sessionId).toBeDefined();
-    expect(response.gameCode).toBeDefined();
+    expect(response!.sessionId).toBeDefined();
+    expect(response!.gameCode).toBeDefined();
   });
 
   test("On submission creates / updates the correct records in the database", async () => {
@@ -23,7 +23,7 @@ describe("Play Game Handler", () => {
 
     // Action
     const response = await playGameCommand.execute();
-    const { sessionId, gameCode } = response;
+    const { sessionId, gameCode } = response!;
 
     const gameSessionAndList = await query.getData(sessionId);
 
