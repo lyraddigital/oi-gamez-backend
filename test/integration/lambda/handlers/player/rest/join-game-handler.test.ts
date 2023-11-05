@@ -215,7 +215,7 @@ describe("Join Game Handler", () => {
     });
   });
 
-  fit("Joining a game with an valid data, and room is empty. Should allow me to submit a join.", async () => {
+  it("Joining a game with an valid data, and room is empty. Should allow me to submit a join.", async () => {
     // Arrange
     const playGameCommand = new PlayGameCommand();
     const connectGameCommand = new ConnectGameCommand();
