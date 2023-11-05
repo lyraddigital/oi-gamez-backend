@@ -1,8 +1,10 @@
 import { ConnectGameCommand, PlayGameCommand } from "../../../shared/commands";
+import { GameSessionStatuses } from "../../../shared/dynamodb";
+import { GameSessionQuery } from "../../../shared/queries";
 
 describe("Connect Game Handler", () => {
   describe("Invalid requests", () => {
-    test("On connect with no session id. Returns socket error.", async () => {
+    it("On connect with no session id. Returns socket error.", async () => {
       // Arrange
       const connectGameCommand = new ConnectGameCommand();
 
@@ -16,7 +18,7 @@ describe("Connect Game Handler", () => {
       }
     });
 
-    test("On connect with invalid session id. Returns socket error.", async () => {
+    it("On connect with invalid session id. Returns socket error.", async () => {
       // Arrange
       const connectGameCommand = new ConnectGameCommand();
       const nonExistingSessionId = "randomSesssionId";
@@ -33,15 +35,24 @@ describe("Connect Game Handler", () => {
   });
 
   describe("Valid requests", () => {
-    test("On connect with no session id. Returns socket error.", async () => {
+    it("On connect with valid session id. Connects successfully and saves the updated info to dynamo.", async () => {
       // Arrange
       const playGameCommand = new PlayGameCommand();
       const connectGameCommand = new ConnectGameCommand();
+      const gameSessionQuery = new GameSessionQuery();
 
-      // Action / Assert
       try {
         const { sessionId } = await playGameCommand.execute();
+        const originalGameSession = await gameSessionQuery.getData(sessionId);
+
+        // Action
         await connectGameCommand.connect(sessionId);
+
+        // Assert
+        const gameSession = await gameSessionQuery.getData(sessionId);
+        expect(gameSession).toBeDefined();
+        expect(gameSession!.status).toBe(GameSessionStatuses.notStarted);
+        expect(gameSession!.ttl).toBeGreaterThan(originalGameSession!.ttl);
       } catch (e) {
         fail(`Unexpected error: ${e}`);
       } finally {

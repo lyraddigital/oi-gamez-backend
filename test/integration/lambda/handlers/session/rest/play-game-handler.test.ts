@@ -3,7 +3,7 @@ import { PlayGameCommand } from "../../../shared/commands";
 import { GameSessionAndListQuery } from "../../../shared/queries";
 
 describe("Play Game Handler", () => {
-  test("On submission returns a new session id and game code", async () => {
+  it("On submission returns a new session id and game code", async () => {
     // Arrange
     const playGameCommand = new PlayGameCommand();
 
@@ -16,7 +16,7 @@ describe("Play Game Handler", () => {
     expect(response!.gameCode).toBeDefined();
   });
 
-  test("On submission creates / updates the correct records in the database", async () => {
+  it("On submission creates / updates the correct records in the database", async () => {
     // Arrange
     const playGameCommand = new PlayGameCommand();
     const query = new GameSessionAndListQuery();

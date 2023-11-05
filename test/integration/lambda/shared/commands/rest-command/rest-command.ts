@@ -11,11 +11,12 @@ export class RestCommand {
     return await this.makePost(endpoint);
   }
 
-  protected async postToCorsEndpoint<TResponse>(
+  protected async postToCorsEndpoint<TRequest, TResponse>(
     endpoint: string,
-    corsOrigin: string
+    corsOrigin: string,
+    request: TRequest
   ): Promise<TResponse> {
-    return await this.makeCorsPost(endpoint, corsOrigin);
+    return await this.makeCorsPost(endpoint, corsOrigin, request);
   }
 
   private async makePost<TRequest, TResponse>(

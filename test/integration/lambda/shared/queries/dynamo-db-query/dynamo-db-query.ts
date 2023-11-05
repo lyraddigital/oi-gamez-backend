@@ -4,7 +4,7 @@ import {
   GetItemCommandInput,
 } from "@aws-sdk/client-dynamodb";
 
-import { dbClient } from "../client";
+import { dbClient } from "../../dynamodb/client";
 import { DYNAMO_DB_TABLE } from "../../environment";
 
 export class DynamoDbQuery {
