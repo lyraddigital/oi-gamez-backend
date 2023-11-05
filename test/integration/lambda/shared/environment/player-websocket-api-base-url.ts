@@ -1,0 +1,2 @@
+export const PLAYER_WEBSOCKET_API_BASE_URL =
+  process.env.PLAYER_WEBSOCKET_API_BASE_URL || "";
