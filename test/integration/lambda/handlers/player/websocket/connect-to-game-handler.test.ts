@@ -4,7 +4,12 @@ import {
   JoinGameCommand,
   PlayGameCommand,
 } from "../../../shared/commands";
+import { GameSessionStatuses } from "../../../shared/dynamodb";
 import { GameSessionQuery, PlayerQuery } from "../../../shared/queries";
+import {
+  GameSessionNumberOfPlayersUpdater,
+  GameSessionStatusUpdater,
+} from "../../../shared/updaters";
 
 describe("Connect To Game Handler", () => {
   describe("Invalid requests", () => {
@@ -33,6 +38,94 @@ describe("Connect To Game Handler", () => {
       } catch (e) {
         expect(e).toBe("Unexpected server response: 400");
       } finally {
+        connectToGameCommand.disconnect();
+      }
+    });
+
+    it("On connect to an inactive game session. Returns socket error.", async () => {
+      // Arrange
+      const playGameCommand = new PlayGameCommand();
+      const connectGameCommand = new ConnectGameCommand();
+      const joinGameCommand = new JoinGameCommand();
+      const connectToGameCommand = new ConnectToGameCommand();
+      const gameSessionStatusUpdater = new GameSessionStatusUpdater();
+
+      // Action / Assert
+      try {
+        const { sessionId, gameCode } = await playGameCommand.execute();
+        await connectGameCommand.connect(sessionId);
+        const { sessionId: playerSessionId } = await joinGameCommand.execute(
+          gameCode,
+          { username: "AA" }
+        );
+        await gameSessionStatusUpdater.update(
+          sessionId,
+          GameSessionStatuses.notActive
+        );
+
+        await connectToGameCommand.connect(playerSessionId);
+      } catch (e) {
+        expect(e).toBe("Unexpected server response: 400");
+      } finally {
+        connectGameCommand.disconnect();
+        connectToGameCommand.disconnect();
+      }
+    });
+
+    it("On connect to an completed game session. Returns socket error.", async () => {
+      // Arrange
+      const playGameCommand = new PlayGameCommand();
+      const connectGameCommand = new ConnectGameCommand();
+      const joinGameCommand = new JoinGameCommand();
+      const connectToGameCommand = new ConnectToGameCommand();
+      const gameSessionStatusUpdater = new GameSessionStatusUpdater();
+
+      // Action / Assert
+      try {
+        const { sessionId, gameCode } = await playGameCommand.execute();
+        await connectGameCommand.connect(sessionId);
+        const { sessionId: playerSessionId } = await joinGameCommand.execute(
+          gameCode,
+          { username: "AA" }
+        );
+        await gameSessionStatusUpdater.update(
+          sessionId,
+          GameSessionStatuses.completed
+        );
+
+        await connectToGameCommand.connect(playerSessionId);
+      } catch (e) {
+        expect(e).toBe("Unexpected server response: 400");
+      } finally {
+        connectGameCommand.disconnect();
+        connectToGameCommand.disconnect();
+      }
+    });
+
+    it("On connect to a game that is full. Returns socket error.", async () => {
+      // Arrange
+      const playGameCommand = new PlayGameCommand();
+      const connectGameCommand = new ConnectGameCommand();
+      const joinGameCommand = new JoinGameCommand();
+      const connectToGameCommand = new ConnectToGameCommand();
+      const gameSessionNumberOfPlayersUpdater =
+        new GameSessionNumberOfPlayersUpdater();
+
+      // Action / Assert
+      try {
+        const { sessionId, gameCode } = await playGameCommand.execute();
+        await connectGameCommand.connect(sessionId);
+        const { sessionId: playerSessionId } = await joinGameCommand.execute(
+          gameCode,
+          { username: "AA" }
+        );
+        await gameSessionNumberOfPlayersUpdater.update(playerSessionId, 8);
+
+        await connectToGameCommand.connect(sessionId);
+      } catch (e) {
+        expect(e).toBe("Unexpected server response: 400");
+      } finally {
+        connectGameCommand.disconnect();
         connectToGameCommand.disconnect();
       }
     });
