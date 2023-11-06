@@ -11,8 +11,12 @@ import { convertFromMillisecondsToSeconds } from "@oigamez/services";
 import { validateSessionId } from "@oigamez/validators";
 
 import { validateEnvironment } from "./configuration";
-import { updatePlayerAndGameSession } from "./repositories";
+import {
+  updatePlayerAndGameSession,
+  updatePlayerConnection,
+} from "./repositories";
 import { runConnectToGameSessionRuleSet } from "./rule-sets";
+import { GameSessionStatuses } from "@oigamez/dynamodb";
 
 validateEnvironment();
 
@@ -40,30 +44,39 @@ export const handler = async (
       return badRequestResponse(ruleResult.errorMessages);
     }
 
-    await updatePlayerAndGameSession({
-      playerSessionId: playerSessionId!,
-      hostSessionId: gameSession!.sessionId,
-      connectionId: connectionId!,
-      gameSessionTTL: gameSession!.ttl,
-    });
+    if (gameSession!.status == GameSessionStatuses.notStarted) {
+      await updatePlayerAndGameSession({
+        playerSessionId: playerSessionId!,
+        hostSessionId: gameSession!.sessionId,
+        connectionId: connectionId!,
+        gameSessionTTL: gameSession!.ttl,
+      });
 
-    const hasPreviouslyConnected = !!player!.connectionId;
-    const canStartGame =
-      gameSession!.minPlayers <= gameSession!.currentNumberOfPlayers + 1;
+      const hasPreviouslyConnected = !!player!.connectionId;
+      const canStartGame =
+        gameSession!.minPlayers <= gameSession!.currentNumberOfPlayers + 1;
 
-    // If the player has already connected previously we don't need to
-    // notify the game host again. So only do this if this is a first
-    // time connection
-    if (!hasPreviouslyConnected) {
-      await sendCommunicationEvent(
-        GAME_SESSION_WEBSOCKET_ENDPOINT,
-        gameSession!.connectionId!,
-        "playerJoined",
-        {
-          username: player!.username,
-          canStartGame,
-        }
-      );
+      // If the player has already connected previously we don't need to
+      // notify the game host again. So only do this if this is a first
+      // time connection
+      if (!hasPreviouslyConnected) {
+        await sendCommunicationEvent(
+          GAME_SESSION_WEBSOCKET_ENDPOINT,
+          gameSession!.connectionId!,
+          "playerJoined",
+          {
+            username: player!.username,
+            canStartGame,
+          }
+        );
+      }
+    } else {
+      // We need to update the connection id for the player session
+      await updatePlayerConnection({
+        playerSessionId: playerSessionId!,
+        hostSessionId: gameSession!.sessionId,
+        connectionId: connectionId!,
+      });
     }
 
     return okResponse();
