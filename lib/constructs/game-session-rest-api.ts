@@ -22,6 +22,9 @@ export class GameSessionRestApi extends Construct {
     });
 
     const gameResource = api.root.addResource(ResourcePaths.gameSession.game);
+    const startGameResource = gameResource.addResource(
+      ResourcePaths.gameSession.start
+    );
     const answersResource = gameResource.addResource(
       ResourcePaths.gameSession.answers
     );
@@ -39,7 +42,7 @@ export class GameSessionRestApi extends Construct {
 
     new StartGameLambda(this, "StartGameHandler", {
       table: props.table,
-      resource: gameResource,
+      resource: startGameResource,
       webSocketApiId: props.playerSocketApi.apiId,
       webSocketAccount: props.account,
       webSocketRegion: props.region,

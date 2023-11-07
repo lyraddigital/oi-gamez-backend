@@ -134,6 +134,7 @@ interface GameSesssionResourcePaths {
   answers: string;
   questions: string;
   end: string;
+  start: string;
 }
 
 interface PlayerResourcePaths {
@@ -221,6 +222,7 @@ export const ResourcePaths: ResourcePaths = {
     game: "games",
     questions: "questions",
     end: "end",
+    start: "start",
   },
   player: {
     choices: "choices",
@@ -283,7 +285,7 @@ export const HandlerFunctionNames: HandlerFunctionNames = {
 export const HeaderNames: HeaderNames = {
   all: {
     contentType: "Content-Type",
-    apiSessionId: "API-SESSION-ID",
+    apiSessionId: "api-session-id",
   },
 };
 

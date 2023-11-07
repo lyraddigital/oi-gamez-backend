@@ -217,19 +217,11 @@ describe("Connect To Game Handler", () => {
 
         await connectToGameCommand.disconnect();
 
-        // Delaying for 2 seconds as deleting items seem to take more than a few milliseconds.
-        // This is most likely due to the expiry lambda that listens on deletes and makes.
-        // additional updates
-        const [disconnectPlayer, disconnectGameSession] = await new Promise<
-          [Player | undefined, GameSession | undefined]
-        >((resolve) => {
-          setTimeout(async () => {
-            const dP = await playerQuery.get(sessionId, playerSessionId);
-            const dGs = await gameSessionQuery.getData(sessionId);
-
-            resolve([dP, dGs]);
-          }, 2000);
-        });
+        const disconnectPlayer = await playerQuery.get(
+          sessionId,
+          playerSessionId
+        );
+        const disconnectGameSession = await gameSessionQuery.getData(sessionId);
 
         const { sessionId: newPlaySessionId } = await joinGameCommand.execute(
           gameCode,
@@ -267,7 +259,7 @@ describe("Connect To Game Handler", () => {
         connectGameCommand.disconnect();
         connectToGameCommand.disconnect();
       }
-    }, 60000);
+    });
 
     it("On reconnect during progress. Connects successfully and saves the updated info to dynamo.", async () => {
       // Arrange
@@ -312,19 +304,11 @@ describe("Connect To Game Handler", () => {
 
         await connectToGameCommand.disconnect();
 
-        // Delaying for 2 seconds as deleting items seem to take more than a few milliseconds.
-        // This is most likely due to the expiry lambda that listens on deletes and makes.
-        // additional updates
-        const [disconnectPlayer, disconnectGameSession] = await new Promise<
-          [Player | undefined, GameSession | undefined]
-        >((resolve) => {
-          setTimeout(async () => {
-            const dP = await playerQuery.get(sessionId, playerSessionId);
-            const dGs = await gameSessionQuery.getData(sessionId);
-
-            resolve([dP, dGs]);
-          }, 2000);
-        });
+        const disconnectPlayer = await playerQuery.get(
+          sessionId,
+          playerSessionId
+        );
+        const disconnectGameSession = await gameSessionQuery.getData(sessionId);
 
         // Action
         await connectToGameCommand.connect(playerSessionId);
@@ -358,6 +342,6 @@ describe("Connect To Game Handler", () => {
         connectGameCommand.disconnect();
         connectToGameCommand.disconnect();
       }
-    }, 60000);
+    });
   });
 });

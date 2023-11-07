@@ -6,4 +6,5 @@ module.exports = {
   transform: {
     "^.+\\.tsx?$": "ts-jest",
   },
+  setupFilesAfterEnv: ["./test/integration/setup.ts"],
 };

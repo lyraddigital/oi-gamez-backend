@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, RawAxiosRequestHeaders } from "axios";
+import { setTimeout } from "node:timers/promises";
 
 import { RestCommandError } from "./rest-command-error";
 
@@ -18,6 +19,13 @@ export class RestCommand {
     return await this.makeRequest(endpoint, "POST");
   }
 
+  protected async patchToEndpoint<TResponse>(
+    endpoint: string,
+    headers?: RawAxiosRequestHeaders
+  ): Promise<TResponse> {
+    return await this.makeRequest(endpoint, "PATCH", undefined, headers);
+  }
+
   protected async postToCorsEndpoint<TRequest, TResponse>(
     endpoint: string,
     corsOrigin: string,
@@ -29,13 +37,17 @@ export class RestCommand {
   private async makeRequest<TRequest, TResponse>(
     endpoint: string,
     method: string,
-    data?: TRequest
+    data?: TRequest,
+    headers?: RawAxiosRequestHeaders
   ): Promise<TResponse> {
     try {
+      await setTimeout(1000);
+
       const response = await axios({
         url: `${this.baseUrl}/${endpoint}`,
         method,
         data,
+        headers,
       });
 
       return response.data as TResponse;
@@ -52,6 +64,8 @@ export class RestCommand {
     data?: TRequest
   ): Promise<TResponse> {
     try {
+      await setTimeout(1000);
+
       const response = await axios({
         url: `${this.baseUrl}/${endpoint}`,
         method,
