@@ -1,5 +1,7 @@
 import {
   ConnectGameCommand,
+  ConnectToGameCommand,
+  JoinGameCommand,
   PlayGameCommand,
   RestCommandError,
   StartGameCommand,
@@ -113,7 +115,7 @@ describe("Start Game Handler", () => {
     }
   });
 
-  it("On submission but not enough players have joined, returns correct errors", async () => {
+  it("On submission and enough players have joined, returns correct data and correct data in dynamodb", async () => {
     // Arrange
     const playGameCommand = new PlayGameCommand();
     const startGameCommand = new StartGameCommand();
@@ -139,6 +141,49 @@ describe("Start Game Handler", () => {
       );
     } finally {
       connectGameCommand.disconnect();
+    }
+  });
+
+  it("On submission but not enough players have joined, returns correct errors", async () => {
+    // Arrange
+    const playGameCommand = new PlayGameCommand();
+    const startGameCommand = new StartGameCommand();
+    const connectGameCommand = new ConnectGameCommand();
+    const joinGameCommand = new JoinGameCommand();
+    const connectUserOneCommand = new ConnectToGameCommand();
+    const connectUserTwoCommand = new ConnectToGameCommand();
+
+    try {
+      // Action
+      const { sessionId, gameCode } = await playGameCommand.execute();
+      await connectGameCommand.connect(sessionId);
+      const { sessionId: firstPlayerSessionId } = await joinGameCommand.execute(
+        gameCode,
+        { username: "AA" }
+      );
+      await connectUserOneCommand.connect(firstPlayerSessionId);
+      const { sessionId: secondPlayerSessionId } =
+        await joinGameCommand.execute(gameCode, { username: "AB" });
+      await connectUserTwoCommand.connect(secondPlayerSessionId);
+
+      const response = await startGameCommand.execute(sessionId);
+
+      // Assert
+      expect(response).toBeDefined();
+      expect(response.currentQuestionNumber).toBe(1);
+      expect(response.totalNumberOfQuestions).toBeGreaterThan(0);
+      expect(response.question).toBeDefined();
+      expect(response.question.text).toBeDefined();
+      expect(response.question.options).toBeDefined();
+
+      response.question.options.forEach((o) => {
+        expect(o.optionId).toBeDefined();
+        expect(o.optionText).toBeDefined();
+      });
+    } finally {
+      connectGameCommand.disconnect();
+      connectUserOneCommand.disconnect();
+      connectUserTwoCommand.disconnect();
     }
   });
 });

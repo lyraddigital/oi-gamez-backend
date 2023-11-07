@@ -14,6 +14,9 @@ export class WebSocketCommand {
         this.websocket.on("error", (e) => {
           reject(e.message);
         });
+        // this.websocket.on("message", (m) => {
+        //   console.log(`Message is ${m}`);
+        // });
         this.websocket.on("open", () => resolve({ connected: true }));
         this.websocket.on("closed", () => resolve({ connected: false }));
       }
