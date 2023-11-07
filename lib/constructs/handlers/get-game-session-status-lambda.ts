@@ -22,7 +22,7 @@ export class GetGameSessionStatusLambda extends Construct {
     const playGameLambda = new RestAPIHandlerFunction(this, "RestAPI", {
       handlerFileLocation: HandlerFilePaths.player.getGameStatus,
       handlerFunctionName: HandlerFunctionNames.player.getGameStatus,
-      method: "POST",
+      method: "GET",
       resource: props.resource,
       environment: {
         [EnvironmentVariables.getGameStatus.tableName]: props.table.tableName,

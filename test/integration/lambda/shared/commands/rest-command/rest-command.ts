@@ -5,10 +5,17 @@ import { RestCommandError } from "./rest-command-error";
 export class RestCommand {
   constructor(private baseUrl: string) {}
 
+  protected async getToCorsEndpoint<TResponse>(
+    endpoint: string,
+    corsOrigin: string
+  ): Promise<TResponse> {
+    return this.makeCorsRequest(endpoint, corsOrigin, "GET");
+  }
+
   protected async postToEndpoint<TResponse>(
     endpoint: string
   ): Promise<TResponse> {
-    return await this.makePost(endpoint);
+    return await this.makeRequest(endpoint, "POST");
   }
 
   protected async postToCorsEndpoint<TRequest, TResponse>(
@@ -16,17 +23,18 @@ export class RestCommand {
     corsOrigin: string,
     request: TRequest
   ): Promise<TResponse> {
-    return await this.makeCorsPost(endpoint, corsOrigin, request);
+    return await this.makeCorsRequest(endpoint, corsOrigin, "POST", request);
   }
 
-  private async makePost<TRequest, TResponse>(
+  private async makeRequest<TRequest, TResponse>(
     endpoint: string,
+    method: string,
     data?: TRequest
   ): Promise<TResponse> {
     try {
       const response = await axios({
         url: `${this.baseUrl}/${endpoint}`,
-        method: "POST",
+        method,
         data,
       });
 
@@ -37,15 +45,16 @@ export class RestCommand {
     }
   }
 
-  private async makeCorsPost<TRequest, TResponse>(
+  private async makeCorsRequest<TRequest, TResponse>(
     endpoint: string,
     corsOrigin: string,
+    method: string,
     data?: TRequest
   ): Promise<TResponse> {
     try {
       const response = await axios({
         url: `${this.baseUrl}/${endpoint}`,
-        method: "POST",
+        method,
         data,
         headers: {
           origin: corsOrigin,
