@@ -1,3 +1,4 @@
+export * from "./choose-option-command";
 export * from "./connect-game-command";
 export * from "./connect-to-game-command";
 export * from "./get-game-status-command";

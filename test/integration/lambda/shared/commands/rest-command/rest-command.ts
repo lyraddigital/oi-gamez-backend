@@ -10,7 +10,9 @@ export class RestCommand {
     endpoint: string,
     corsOrigin: string
   ): Promise<TResponse> {
-    return this.makeCorsRequest(endpoint, corsOrigin, "GET");
+    return this.makeCorsRequest(endpoint, "GET", undefined, {
+      origin: corsOrigin,
+    });
   }
 
   protected async postToEndpoint<TResponse>(
@@ -31,7 +33,32 @@ export class RestCommand {
     corsOrigin: string,
     request: TRequest
   ): Promise<TResponse> {
-    return await this.makeCorsRequest(endpoint, corsOrigin, "POST", request);
+    return await this.makeCorsRequest(endpoint, "POST", request, {
+      origin: corsOrigin,
+    });
+  }
+
+  protected async patchToCorsEndpoint<TRequest, TResponse>(
+    endpoint: string,
+    corsOrigin: string,
+    request: TRequest,
+    headers?: RawAxiosRequestHeaders
+  ): Promise<TResponse> {
+    let requestHeaders: RawAxiosRequestHeaders = { origin: corsOrigin };
+
+    if (headers) {
+      requestHeaders = {
+        ...requestHeaders,
+        ...headers,
+      } as RawAxiosRequestHeaders;
+    }
+
+    return await this.makeCorsRequest(
+      endpoint,
+      "PATCH",
+      request,
+      requestHeaders
+    );
   }
 
   private async makeRequest<TRequest, TResponse>(
@@ -59,9 +86,9 @@ export class RestCommand {
 
   private async makeCorsRequest<TRequest, TResponse>(
     endpoint: string,
-    corsOrigin: string,
     method: string,
-    data?: TRequest
+    data?: TRequest,
+    headers?: RawAxiosRequestHeaders
   ): Promise<TResponse> {
     try {
       await setTimeout(1000);
@@ -70,9 +97,7 @@ export class RestCommand {
         url: `${this.baseUrl}/${endpoint}`,
         method,
         data,
-        headers: {
-          origin: corsOrigin,
-        },
+        headers,
       });
 
       return response.data as TResponse;

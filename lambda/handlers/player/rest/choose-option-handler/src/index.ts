@@ -20,9 +20,7 @@ export const handler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const origin = event.headers["origin"];
-    const playerSessionId = event.queryStringParameters
-      ? event.queryStringParameters["sessionId"]
-      : undefined;
+    const sessionId = event.headers["api-session-id"];
     const epochTime = event.requestContext.requestTimeEpoch;
     let optionId: string | undefined;
 
@@ -35,7 +33,7 @@ export const handler = async (
 
     const requestValidationResult = validateRequest(
       origin,
-      playerSessionId,
+      sessionId,
       optionId
     );
 
@@ -44,7 +42,7 @@ export const handler = async (
     }
 
     const ttl = convertFromMillisecondsToSeconds(epochTime);
-    const player = await getPlayerBySessionId(playerSessionId!, ttl);
+    const player = await getPlayerBySessionId(sessionId!, ttl);
     const playerRuleSet = runPlayerRuleSet(player);
 
     if (!playerRuleSet.isSuccessful) {
