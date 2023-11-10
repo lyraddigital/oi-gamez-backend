@@ -8,6 +8,7 @@ import {
   RestCommandError,
   StartGameCommand,
 } from "../../../shared/commands";
+import { PlayerQuery } from "../../../shared/queries";
 import {
   GameSessionAllowSubmissionsUpdater,
   PlayerHostSessionUpdater,
@@ -220,6 +221,49 @@ describe("Choose Option Handler", () => {
         expect(commandError.errorPayload.errorMessages[0]).toBe(
           "Cannot choose option for the current question. Could not determine the game that the choice was for."
         );
+      } finally {
+        connectGameCommand.disconnect();
+        connectUserOneToGameCommand.disconnect();
+        connectUserTwoToGameCommand.disconnect();
+      }
+    });
+
+    it("Choosing an option and all details valid, should succeed and correct data is saved.", async () => {
+      // Arrange
+      const playGameCommand = new PlayGameCommand();
+      const connectGameCommand = new ConnectGameCommand();
+      const joinGameCommand = new JoinGameCommand();
+      const connectUserOneToGameCommand = new ConnectToGameCommand();
+      const connectUserTwoToGameCommand = new ConnectToGameCommand();
+      const startGameCommand = new StartGameCommand();
+      const chooseOptionCommand = new ChooseOptionCommand();
+      const playerQuery = new PlayerQuery();
+
+      // Action
+      try {
+        const { gameCode, sessionId } = await playGameCommand.execute();
+        await connectGameCommand.connect(sessionId);
+        const { sessionId: playerOneSessionId } = await joinGameCommand.execute(
+          gameCode,
+          { username: "AA" }
+        );
+        await connectUserOneToGameCommand.connect(playerOneSessionId);
+        const { sessionId: playerTwoSessionId } = await joinGameCommand.execute(
+          gameCode,
+          { username: "AB" }
+        );
+        await connectUserTwoToGameCommand.connect(playerTwoSessionId);
+        const { question } = await startGameCommand.execute(sessionId);
+        const randomChoiceId = question.options[0].optionId;
+
+        await chooseOptionCommand.execute(playerOneSessionId, {
+          optionId: randomChoiceId,
+        });
+
+        // Assert
+        const player = await playerQuery.get(sessionId, playerOneSessionId);
+        expect(player?.choices.size).toBe(1);
+        expect(player?.choices.get(1)).toBe(randomChoiceId);
       } finally {
         connectGameCommand.disconnect();
         connectUserOneToGameCommand.disconnect();

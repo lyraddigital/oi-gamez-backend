@@ -16,7 +16,14 @@ const getChoicesMap = (
 
   if (choicesAttribute) {
     const recordMap = getDynamoMap(choicesAttribute);
-    // Later we'll fix this to get all the choices when entered
+
+    Object.keys(recordMap).forEach((key) => {
+      const keyAsNumber = parseInt(key, 10);
+
+      if (!Number.isNaN(keyAsNumber)) {
+        map.set(keyAsNumber, getDynamoString(recordMap[key]));
+      }
+    });
   }
 
   return map;

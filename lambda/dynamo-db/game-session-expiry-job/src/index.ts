@@ -7,17 +7,20 @@ export const handler = async (
   dynamoEvent: DynamoDBStreamEvent
 ): Promise<void> => {
   for (let record of dynamoEvent.Records) {
-    const isGameSession =
-      record.dynamodb?.OldImage &&
-      record.dynamodb.OldImage[dynamoFieldNames.common.type]?.S ==
-        Types.gameSession;
-    const gameCode = record.dynamodb?.OldImage
-      ? record.dynamodb.OldImage[dynamoFieldNames.gameSession.gameCode]?.S || ""
-      : "";
-    const hasGameCode = !!gameCode;
+    if (record.eventName === "REMOVE") {
+      const isGameSession =
+        record.dynamodb?.OldImage &&
+        record.dynamodb.OldImage[dynamoFieldNames.common.type]?.S ==
+          Types.gameSession;
+      const gameCode = record.dynamodb?.OldImage
+        ? record.dynamodb.OldImage[dynamoFieldNames.gameSession.gameCode]?.S ||
+          ""
+        : "";
+      const hasGameCode = !!gameCode;
 
-    if (isGameSession && hasGameCode) {
-      await removeCodeFromGameList(gameCode);
+      if (isGameSession && hasGameCode) {
+        await removeCodeFromGameList(gameCode);
+      }
     }
   }
 };
