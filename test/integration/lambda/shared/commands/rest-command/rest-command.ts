@@ -6,7 +6,14 @@ import { RestCommandError } from "./rest-command-error";
 export class RestCommand {
   constructor(private baseUrl: string) {}
 
-  protected async getToCorsEndpoint<TResponse>(
+  protected async getFromEndpoint<TResponse>(
+    endpoint: string,
+    headers?: RawAxiosRequestHeaders
+  ): Promise<TResponse> {
+    return this.makeRequest(endpoint, "GET", undefined, headers);
+  }
+
+  protected async getFromCorsEndpoint<TResponse>(
     endpoint: string,
     corsOrigin: string
   ): Promise<TResponse> {

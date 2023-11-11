@@ -11,7 +11,7 @@ export class GetGameStatusCommand extends RestCommand {
   }
 
   public async execute(gameCode?: string): Promise<GameSessionStatus> {
-    return await this.getToCorsEndpoint<GameSessionStatus>(
+    return await this.getFromCorsEndpoint<GameSessionStatus>(
       `games/${gameCode}/status`,
       PLAYER_REST_API_ORIGIN
     );
