@@ -13,7 +13,7 @@ export class DynamoDbUpdater {
     sk: AttributeValue,
     updateExpression: string,
     expressionAttributeNames: Record<string, string>,
-    expressionAttributeValues: Record<string, AttributeValue>
+    expressionAttributeValues?: Record<string, AttributeValue>
   ): Promise<void> {
     const updateItemCommandInput: UpdateItemCommandInput = {
       TableName: DYNAMO_DB_TABLE,

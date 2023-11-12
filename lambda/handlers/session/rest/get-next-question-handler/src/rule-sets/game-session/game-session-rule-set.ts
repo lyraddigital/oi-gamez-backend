@@ -30,24 +30,24 @@ export const runGameSessionRuleResult = (
     const currentQuestionNumber = gameSession.currentQuestionNumber;
     const questions = gameSession.questions;
 
-    if (!questions || !currentQuestionNumber) {
+    if (questions?.length === 0 || !currentQuestionNumber) {
       return {
         isSuccessful: false,
         errorMessages: [
           "Cannot get next question. Question data could not be found.",
         ],
       };
-    }
+    } else {
+      const questionsLength = gameSession.questions.length;
 
-    const questionsLength = gameSession.questions?.length || 0;
-
-    if (currentQuestionNumber == questionsLength) {
-      return {
-        isSuccessful: false,
-        errorMessages: [
-          "Cannot get next question. This was the last question.",
-        ],
-      };
+      if (currentQuestionNumber == questionsLength) {
+        return {
+          isSuccessful: false,
+          errorMessages: [
+            "Cannot get next question. This was the last question.",
+          ],
+        };
+      }
     }
   }
 

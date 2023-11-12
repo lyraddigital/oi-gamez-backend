@@ -144,6 +144,7 @@ export const dynamoFieldValues: DynamoFieldValues = {
     type: stringAttribute(Types.gameSession),
     status: (status) => stringAttribute(status),
     currentNumberOfPlayers: (count) => numberAttribute(count),
+    currentQuestionNumber: (questionNumber) => numberAttribute(questionNumber),
     connectionId: (connectionId) => stringAttribute(connectionId),
     gameCode: (gameCode) => stringAttribute(gameCode),
     isAllowingSubmissions: (isAllowingSubmissions) =>

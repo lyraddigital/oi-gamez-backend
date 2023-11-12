@@ -2,6 +2,7 @@ export * from "./choose-option-command";
 export * from "./connect-game-command";
 export * from "./connect-to-game-command";
 export * from "./get-answer-command";
+export * from "./get-next-question-command";
 export * from "./get-game-status-command";
 export * from "./join-game-command";
 export * from "./play-game-command";

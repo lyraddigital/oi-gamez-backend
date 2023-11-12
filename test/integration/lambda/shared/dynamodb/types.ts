@@ -48,6 +48,7 @@ interface GameSessionFieldValues {
   sk: AttributeValue.SMember;
   type: AttributeValue.SMember;
   status: (status: string) => AttributeValue.SMember;
+  currentQuestionNumber: (questionNumber: number) => AttributeValue.NMember;
   currentNumberOfPlayers: (count: number) => AttributeValue.NMember;
   connectionId: (connectionId: string) => AttributeValue.SMember;
   gameCode: (gameCode: string) => AttributeValue.SMember;
