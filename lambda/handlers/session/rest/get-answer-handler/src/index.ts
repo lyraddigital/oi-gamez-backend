@@ -50,7 +50,7 @@ export const handler = async (
       const playerChoice = p.choices?.get(currentQuestionNumber);
       const hasCorrectAnswer = playerChoice === answer;
 
-      sendCommunicationEvent(
+      return sendCommunicationEvent(
         PLAYER_WEBSOCKET_ENDPOINT,
         p.connectionId!,
         "confirmAnswer",

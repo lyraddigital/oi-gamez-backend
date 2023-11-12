@@ -41,7 +41,6 @@ export const getLeaderboard = (
   const playerScores = getPlayerScores(gameSession, players, answerKeys);
   const allScoresSorted = playerScores
     .sort((ps) => ps.score)
-    .reverse()
     .map((ps) => ps.score);
   const scorePositions = new Map<number, number>();
   let currentPosition = 0;

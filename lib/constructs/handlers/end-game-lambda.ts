@@ -31,7 +31,7 @@ export class EndGameLambda extends Construct {
     const dbPolicyDocument = new PolicyStatement({
       effect: Effect.ALLOW,
       resources: [props.table.tableArn],
-      actions: ["dynamodb:Query"],
+      actions: ["dynamodb:Query", "dynamodb:UpdateItem"],
     });
 
     const apiExecPolicyDocument = new PolicyStatement({
