@@ -15,7 +15,7 @@ export class PlayersRestApi extends Construct {
   constructor(scope: Construct, id: string, props: PlayersRestApiProps) {
     super(scope, id);
 
-    const allowedOrigins = "https://oigamez.com";
+    const allowedOrigins = "https://oigamez.tv";
     const api = new RestApi(scope, "PlayerApi", {
       description:
         "HTTP API that will be utilized by the Web application for players so that they can join and participate in games.",

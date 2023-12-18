@@ -1,4 +1,5 @@
 interface EnvironmentVariables {
+  completeGame: CompleteGameEnvironmentVariables;
   playGame: PlayGameEnvironmentVariables;
   startGame: StartGameEnvironmentVariables;
   getAnswer: GetAnswerEnvironmentVariables;
@@ -11,6 +12,11 @@ interface EnvironmentVariables {
   connectToGame: ConnectToGameEnvironmentVariables;
   disconnectFromGame: DisconnectFromGameEnvironmentVariables;
   gameSessionExpiryJob: GameSessionExpiryJobEnvironmentVariables;
+}
+
+interface CompleteGameEnvironmentVariables {
+  tableName: string;
+  playerWebsocketEndpoint: string;
 }
 
 interface PlayGameEnvironmentVariables {
@@ -84,6 +90,7 @@ interface HandlerFilePaths {
 }
 
 interface GameSessionHandlerFilePaths {
+  completeGame: string;
   playGame: string;
   startGame: string;
   getAnswer: string;
@@ -107,6 +114,7 @@ interface HandlerFunctionNames {
 }
 
 interface GameSessionFunctionNames {
+  completeGame: string;
   playGame: string;
   startGame: string;
   getAnswer: string;
@@ -130,6 +138,7 @@ interface ResourcePaths {
 }
 
 interface GameSesssionResourcePaths {
+  complete: string;
   game: string;
   answers: string;
   questions: string;
@@ -161,6 +170,10 @@ interface IndexNames {
 }
 
 export const EnvironmentVariables: EnvironmentVariables = {
+  completeGame: {
+    tableName: "DYNAMO_TABLE_NAME",
+    playerWebsocketEndpoint: "PLAYER_WEBSOCKET_ENDPOINT",
+  },
   playGame: {
     tableName: "DYNAMO_TABLE_NAME",
     gameCodeLength: "GAME_CODE_LENGTH",
@@ -218,6 +231,7 @@ export const EnvironmentVariables: EnvironmentVariables = {
 
 export const ResourcePaths: ResourcePaths = {
   gameSession: {
+    complete: "complete",
     answers: "answers",
     game: "games",
     questions: "questions",
@@ -235,6 +249,8 @@ export const ResourcePaths: ResourcePaths = {
 
 export const HandlerFilePaths: HandlerFilePaths = {
   gameSession: {
+    completeGame:
+      "../../../lambda/handlers/session/rest/complete-game-handler/src/index.ts",
     playGame:
       "../../../lambda/handlers/session/rest/play-game-handler/src/index.ts",
     startGame:
@@ -265,6 +281,7 @@ export const HandlerFilePaths: HandlerFilePaths = {
 
 export const HandlerFunctionNames: HandlerFunctionNames = {
   gameSession: {
+    completeGame: "handler",
     playGame: "handler",
     startGame: "handler",
     getAnswer: "handler",

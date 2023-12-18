@@ -1,5 +1,6 @@
 export * from "./api-handler-function-props";
 export * from "./choose-option-lambda-props";
+export * from "./complete-game-lambda-props";
 export * from "./connect-game-lambda-props";
 export * from "./connect-to-game-lambda-props";
 export * from "./disconnect-from-game-lambda-props";

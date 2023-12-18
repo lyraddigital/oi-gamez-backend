@@ -5,6 +5,7 @@ import { ResourcePaths } from "../constants";
 import { GameSessionRestApiProps } from "../props";
 
 import {
+  CompleteGameLambda,
   EndGameLambda,
   GetAnswerLambda,
   GetNextQuestionLambda,
@@ -33,6 +34,9 @@ export class GameSessionRestApi extends Construct {
     );
     const endGameResource = gameResource.addResource(
       ResourcePaths.gameSession.end
+    );
+    const completeGameResource = gameResource.addResource(
+      ResourcePaths.gameSession.complete
     );
 
     new PlayGameLambda(this, "PlayGameHandler", {
@@ -70,6 +74,15 @@ export class GameSessionRestApi extends Construct {
     new EndGameLambda(this, "EndGameHandler", {
       table: props.table,
       resource: endGameResource,
+      webSocketApiId: props.playerSocketApi.apiId,
+      webSocketAccount: props.account,
+      webSocketRegion: props.region,
+      webSocketStage: props.playerWebSocketStageName,
+    });
+
+    new CompleteGameLambda(this, "CompleteGameLambda", {
+      table: props.table,
+      resource: completeGameResource,
       webSocketApiId: props.playerSocketApi.apiId,
       webSocketAccount: props.account,
       webSocketRegion: props.region,

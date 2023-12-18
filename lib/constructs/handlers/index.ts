@@ -1,4 +1,5 @@
 export * from "./choose-option-lambda";
+export * from "./complete-game-lambda";
 export * from "./connect-game-lambda";
 export * from "./connect-to-game-lambda";
 export * from "./disconnect-from-game-lambda";
